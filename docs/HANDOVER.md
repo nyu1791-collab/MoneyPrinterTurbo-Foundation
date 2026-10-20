@@ -59,7 +59,10 @@
    - `python:3.11-slim-bullseye` の apt は ffmpeg 4.3.9 を入れる（bullseye-security の索引で確認）。4.3.9 の `.deb` はこの環境から取得できなかったため、同系統の 4.3.7 で検証した。
    - 4.3 系では `app/services/video_project.py` のレンダラが `amix normalize` で失敗する。このレンダラは製品の生成経路（`task.py`、API、WebUI）からは参照されず、CLI の `python -m app.services.video_project` とテストだけが使う。
    - 色テスト（BT.709）も 4.3.7 では許容誤差を外れる。6.1.1、7.0.2、5.1.9 では通る。
-   - **推奨**: Docker の base を `python:3.11-slim-bookworm` に変え、apt のソース行も bookworm に直す。bookworm の ffmpeg 5.1.9 では全体テストが通ることを確認済み。Docker デーモンがこの環境に無いため、Dockerfile の build は未検証。
+   - **対応済み**: Dockerfile の base を `python:3.11-slim-bookworm` に変え、apt のソース行も bookworm に直した。bookworm の公式イメージは `/etc/apt/sources.list.d/debian.sources`（deb822）を持つため、それを削除する処理も入れた（残すと sources が二重になり、国内ミラーへの切り替えが効かない）。
+   - **build と検証**: デフォルトミラー（`DOCKER_BUILD_MIRROR=default`、`PIP_USE_OFFICIAL=1`）で build が成功。イメージ内の ffmpeg は 5.1.9、Python は 3.11.17。イメージ内で ffmpeg 依存テスト 112 件が通り、WebUI は `/_stcore/health` が `ok`、ルートは HTTP 200。
+   - **未検証**: 国内ミラー（`DOCKER_BUILD_MIRROR=china`、既定値）経路の build は未実施。この経路も同じ sources 処理を通る。
+   - この環境の build はサンドボックスのプロキシ CA を信頼させたテスト用ベースイメージで行った（リポジトリには含めていない）。
    - ffmpeg の解決順: 検証側（`get_ffmpeg_binary`）は PATH を同梱より優先する。MoviePy は既定で同梱（7.0.2）を使う。`app.ffmpeg_path` を設定すると両者が揃う。
    - `docs/video-projects.md` の要件に FFmpeg 4.4 以上を追記済み。
 4. **`config.toml` の自動生成**: `app.config` は読み込み時に `config.example.toml` から `config.toml` を作る（上流の挙動）。テスト実行でもリポジトリ直下に作られる（`.gitignore` 済み）。`mpt doctor` 自体は作らない。
@@ -69,9 +72,9 @@
 ## 5. 推奨する次の作業
 
 1. GitHub の Actions 設定を確認する。このブランチで CI を走らせるには PR か `main` への反映が要る。PR の作成はオーナーの承認後。
-2. Dockerfile を bookworm（ffmpeg 5.1 系）へ移す。Docker デーモンのある環境で build し、可能なら全体テストを回す。
+2. 国内ミラー経路（`DOCKER_BUILD_MIRROR=china`）でも build を通す。
 3. Opus のクォータ解消後に提案を取得し、採否を記録する。
-4. 「Argon」の査読記録の所在を確認し、本メモと照合する。
+4. 「Argon」（Antigravity API 経由）の査読結果を、このセッションから参照できる形にする。現時点ではツールが無く、内容を取得できていない。
 
 ## 6. 再現コマンド
 
