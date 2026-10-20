@@ -61,7 +61,7 @@ def test_stderr_error_rejects_when_ffmpeg_exits_zero(tmp_path):
         stderr=b"[mp3float @ 0x1] Header missing\n",
     )
     with patch.object(bgm.subprocess, "run", return_value=completed):
-        with pytest.raises(bgm.BgmUploadError, match="decodable"):
+        with pytest.raises(bgm.BgmUploadError, match="must contain a decodable audio stream"):
             bgm._validate_audio(str(tmp_path / "damaged.mp3"))
 
 
