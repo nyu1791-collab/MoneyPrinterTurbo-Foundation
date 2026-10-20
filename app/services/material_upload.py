@@ -223,7 +223,8 @@ def _validate_video(
         raise MaterialServiceError(
             "failed to run FFmpeg for material validation"
         ) from exc
-    if decoded.returncode != 0:
+    # Some FFmpeg builds exit 0 after reporting a damaged frame, so stderr errors also reject.
+    if decoded.returncode != 0 or decoded.stderr.strip():
         raise MaterialUploadError(
             "uploaded file must contain a completely decodable video stream"
         )
