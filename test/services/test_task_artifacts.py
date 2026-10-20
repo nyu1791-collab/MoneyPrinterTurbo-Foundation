@@ -99,3 +99,20 @@ class TestTaskArtifacts(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_failed_patch_does_not_log_exception_or_update_names(tmp_path):
+    target = tmp_path / "script.json"
+    target.write_text('{"script": "preserved"}')
+    with (
+        patch.object(task_artifacts.utils, "task_dir", return_value=str(tmp_path)),
+        patch.object(task_artifacts, "_write_json_atomic",
+                     side_effect=OSError("PRIVATE_EXCEPTION_VALUE")),
+        patch.object(task_artifacts.logger, "warning") as warning,
+    ):
+        assert task_artifacts.patch_script_data(
+            "PRIVATE_TASK_ID", **{"PRIVATE_FIELD_NAME": "PRIVATE_PAYLOAD"}
+        ) is False
+    assert json.loads(target.read_text()) == {"script": "preserved"}
+    assert warning.called
+    assert "PRIVATE" not in str(warning.call_args)

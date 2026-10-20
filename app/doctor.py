@@ -26,7 +26,10 @@ def inspect_environment(config_path: Path | None = None) -> dict:
         with path.open("rb") as stream:
             config = tomllib.load(stream)
     except FileNotFoundError:
-        add("config", "warning", "Configuration absent; create a private config.toml before generation.")
+        if config_path is not None:
+            add("config", "error", "Specified configuration file does not exist.")
+        else:
+            add("config", "warning", "Configuration absent; create a private config.toml before generation.")
     except (OSError, ValueError):
         # TOML parser exceptions can contain the actual input, including credentials.
         add("config", "error", "Configuration unreadable or invalid TOML; values suppressed.")
@@ -34,8 +37,15 @@ def inspect_environment(config_path: Path | None = None) -> dict:
         add("config", "ok", "TOML parsed; provider credentials have not been verified.")
         host = config.get("listen_host", "0.0.0.0")
         app = config.get("app", {})
+        valid_host = isinstance(host, str) and bool(host.strip())
+        if not valid_host:
+            add("listen_host", "error", "listen_host must be a non-empty string.")
         if not isinstance(app, dict):
             add("api_access", "error", "The app configuration must be a TOML table.")
+        elif not isinstance(app.get("api_key", ""), str):
+            add("api_access", "error", "api_key must be a string if configured.")
+        elif not valid_host:
+            pass  # Binding errors are reported above; do not imply API readiness.
         elif host not in ("127.0.0.1", "::1", "localhost") and not (
             isinstance(app.get("api_key"), str) and app["api_key"].strip()
         ):

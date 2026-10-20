@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-20T15:31:34.056781+00:00",
+  "provider": "vertex-ai",
+  "model": "gemini-3.8-flash",
+  "role": "research_and_proposals_only",
+  "source_revision": "1ba3d58",
+  "tools_provided": false,
+  "fallback": false,
+  "request_count": 2,
+  "calls": [
+    {
+      "modelVersion": "gemini-3.8-flash",
+      "usageMetadata": {
+        "promptTokenCount": 20169,
+        "candidatesTokenCount": 398,
+        "totalTokenCount": 30165,
+        "trafficType": "ON_DEMAND",
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 20169
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 398
+          }
+        ],
+        "thoughtsTokenCount": 9598
+      },
+      "finishReasons": [
+        "MAX_TOKENS"
+      ]
+    },
+    {
+      "modelVersion": "gemini-3.8-flash",
+      "usageMetadata": {
+        "promptTokenCount": 20253,
+        "candidatesTokenCount": 2150,
+        "totalTokenCount": 22403,
+        "trafficType": "ON_DEMAND",
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 20253
+          }
+        ],
+        "candidatesTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 2150
+          }
+        ]
+      },
+      "finishReasons": [
+        "STOP"
+      ]
+    }
+  ],
+  "result": "Second request completed; first truncated and not accepted as a completed proposal.",
+  "implementation_author": "Codex",
+  "validation": {
+    "regressions_reproduced_before_fix": 3,
+    "related_tests_passed": 53,
+    "warnings": 1,
+    "full_suite_run": false
+  },
+  "billing_amount_verified": false
+}

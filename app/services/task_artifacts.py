@@ -75,7 +75,7 @@ def patch_script_data(task_id: str, **updates: Any) -> bool:
     在保留原有字段的前提下补充任务清单，失败时返回 ``False``。
 
     素材来源属于辅助诊断信息，不能因为文件权限、磁盘瞬时异常或历史文件损坏
-    阻断视频生成。因此该入口会记录完整异常并降级；首次创建任务清单仍使用
+    阻断视频生成。因此该入口只记录异常类型并降级；首次创建任务清单仍使用
     ``write_script_data``，由主流程决定基础任务数据写入失败时如何处理。
     """
     try:
@@ -100,7 +100,6 @@ def patch_script_data(task_id: str, **updates: Any) -> bool:
     except Exception as exc:
         logger.warning(
             "failed to update task script data: "
-            f"task_id={task_id}, fields={sorted(updates)}, "
-            f"error={type(exc).__name__}, detail={exc}"
+            f"error={type(exc).__name__}, update_count={len(updates)}"
         )
         return False

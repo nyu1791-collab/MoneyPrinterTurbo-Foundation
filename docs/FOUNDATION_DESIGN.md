@@ -28,7 +28,7 @@ uv run --no-sync python -m app.doctor --json
 
 Keep runtime data outside the checkout using a private `MPT_HOME` directory. Copy `config.example.toml` to that directory as `config.toml` and edit it privately when generation is actually needed. Alternatively, `doctor --config /private/config.toml` reads one explicit file without printing its path or contents. Protect configuration with filesystem permissions; do not commit it or put credentials in command arguments.
 
-Doctor exit codes: 0 for checks that are OK or warnings; 1 for missing FFmpeg/FFprobe or unreadable/invalid configuration; 2 for invalid command arguments. Missing configuration is a warning and is not automatically created. Warnings require attention before exposing an API.
+Doctor exit codes: 0 for checks that are OK or warnings; 1 for missing FFmpeg/FFprobe, missing explicitly selected configuration, or unreadable/invalid configuration; 2 for invalid command arguments. Missing default configuration is a warning and is not automatically created. Explicitly selecting a missing file is an error. Warnings require attention before exposing an API.
 A successful doctor result does not verify provider credentials, network connectivity, codecs, fonts, filesystem writability or a rendered video. This is not a complete security check.
 
 ## Requested external research: actual result
@@ -58,3 +58,7 @@ References:
 - No complete post-change suite, GitHub-hosted CI run, production video/audio generation, provider credential test or public media upload was performed.
 
 Do not replace remaining unknowns with a blanket “all tests passed” or “production ready” claim.
+
+## Follow-up: Gemini 3.8 Flash
+
+The user subsequently selected Gemini 3.8 Flash. It returned source-grounded proposals, and Codex implemented three reproduced fixes with 53 related tests passing. See [proposal and implementation details](GEMINI_FOUNDATION_PROPOSALS.md). The Opus record above remains the historical result of that earlier request.
