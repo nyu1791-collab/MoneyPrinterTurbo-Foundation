@@ -35,6 +35,11 @@ def _available_port(host: str) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == "doctor":
+        from app.doctor import main as doctor_main
+
+        return doctor_main(argv[1:])
+
     # CLI 自己负责完整参数校验、帮助和退出码，避免两层解析器吞掉业务参数。
     if argv and argv[0] == "cli":
         if paths.is_source_checkout():
@@ -48,6 +53,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="mpt", description="MoneyPrinterTurbo")
     parser.add_argument("--version", action="version", version=__version__)
     commands = parser.add_subparsers(dest="command")
+    commands.add_parser("doctor", help="offline read-only environment checks (mpt doctor --help)")
     commands.add_parser("cli", help="generate videos (mpt cli --help)")
     webui = commands.add_parser("webui", help="start the WebUI")
     webui.add_argument("--host", default="127.0.0.1", help="listen address")

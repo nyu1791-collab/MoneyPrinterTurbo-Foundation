@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-20",
+  "provider": "vertex-ai",
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "role": "proposals_only",
+  "tools_provided": false,
+  "attempts": 1,
+  "automatic_retry": false,
+  "fallback": false,
+  "status": "blocked",
+  "http_status": 429,
+  "api_status": "RESOURCE_EXHAUSTED",
+  "proposal_received": false,
+  "quota": {
+    "metric": "aiplatform.googleapis.com/global_online_prediction_requests_per_base_model",
+    "base_model": "anthropic-claude-opus",
+    "effective_requests_per_minute": 0
+  },
+  "billing_verified": false,
+  "implementation_author": "Codex",
+  "production_media_generated": false
+}

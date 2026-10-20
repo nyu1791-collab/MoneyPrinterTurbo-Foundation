@@ -1,3 +1,8 @@
+> **Independent Foundation fork / 独立した派生版**<br>
+> Maintained at [nyu1791-collab/MoneyPrinterTurbo-Foundation](https://github.com/nyu1791-collab/MoneyPrinterTurbo-Foundation).<br>
+> Based on [harry0703/MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo), MIT; upstream history and attribution retained.<br>
+> [Foundation setup and actual validation / 導入・検証記録](docs/FOUNDATION_DESIGN.md). The upstream documentation follows below.
+
 <div align="center">
 
 # MoneyPrinterTurbo 💸
