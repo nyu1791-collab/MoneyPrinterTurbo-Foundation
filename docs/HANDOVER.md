@@ -8,10 +8,10 @@
 
 - 基盤層として追加済み: オフライン・読み取り専用の `mpt doctor`、CI の `contents: read`、GHCR 公開の手動オプトイン（`publish=true` のときだけ push）。
 - 既存のレビュー記録:
-  - [WHOLE_REPOSITORY_REVIEW.md](WHOLE_REPOSITORY_REVIEW.md): Gemini 3.8 Flash による全 353 テキストファイルの静的レビュー。照合して採用した指摘のみ修正。不採用の 9 件は理由付きで記録。
+  - [WHOLE_REPOSITORY_REVIEW.md](WHOLE_REPOSITORY_REVIEW.md): Gemini 3.8 Flash による全 353 テキストファイルの静的レビュー。照合して採用した指摘のみ修正。不採用の 10 件は理由付きで記録。
   - [GEMINI_FOUNDATION_PROPOSALS.md](GEMINI_FOUNDATION_PROPOSALS.md): その前段の提案と修正。
   - [FOUNDATION_DESIGN.md](FOUNDATION_DESIGN.md): 設計と検証の経緯。Opus 提案は HTTP 429（クォータ 0 RPM）で未取得。
-- 「アルゴン（Argon）」による査読の記録は、リポジトリ、PR（0 件）、Issue（0 件）のいずれにも見当たらない。
+- 「アルゴン（Argon）」による査読の記録は、リポジトリ、PR（0 件）、オープンな Issue（0 件）のいずれにも見当たらない。
 
 ## 2. 引き継ぎ時の検証
 
@@ -24,7 +24,7 @@
 | 全体テスト、同梱 ffmpeg 7.0.2（`IMAGEIO_FFMPEG_EXE` 指定） | **2463 passed / 0 failed / 19 skipped** |
 | coverage（CI と同じ分岐計測、閾値 70%） | TOTAL 85%。閾値を満たす |
 
-テストには Redis が必要（`MPT_TEST_REDIS_HOST=127.0.0.1`、`MPT_TEST_REDIS_PORT=6379`、`MPT_TEST_REDIS_DB=15`）。
+テストには Redis が必要。検証は Redis 7.0.15 で、CI と同じ環境変数（`MPT_TEST_REDIS_HOST=127.0.0.1`、`MPT_TEST_REDIS_PORT=6379`、`MPT_TEST_REDIS_DB=15`）を指定して実施。
 
 ## 3. 今回修正した不具合: ffmpeg のビルド差で破損音声を受理していた
 
@@ -43,7 +43,7 @@
 
 ## 4. 未解決・要判断
 
-1. **このブランチで CI が動いていない**。`ci.yml` のトリガーは `pull_request` と `main` への push だけで、PR は 0 件、ワークフローの実行履歴も 0 件。`FOUNDATION_DESIGN.md` は「Actions はリポジトリ単位で無効」と記すが、API ではワークフローは `active` と返る。GitHub の設定画面で実態を確認する。
+1. **このブランチで CI が動いていない**。`ci.yml` のトリガーは `pull_request` と `main` への push だけで、PR は 0 件、CI（`ci.yml`）の実行履歴も 0 件。`FOUNDATION_DESIGN.md` は「Actions はリポジトリ単位で無効」と記すが、API ではワークフローは `active` と返る。GitHub の設定画面で実態を確認する。
 2. **Opus 提案は未取得**（Vertex のクォータ 0 RPM、[vertex-proposal-receipt.json](vertex-proposal-receipt.json)）。
 3. **ffmpeg の解決順と版がばらつく**:
    - 検証側（`get_ffmpeg_binary`）は PATH を同梱より優先する。
