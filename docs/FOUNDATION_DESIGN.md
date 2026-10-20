@@ -62,3 +62,7 @@ Do not replace remaining unknowns with a blanket “all tests passed” or “pr
 ## Follow-up: Gemini 3.8 Flash
 
 The user subsequently selected Gemini 3.8 Flash. It returned source-grounded proposals, and Codex implemented three reproduced fixes with 53 related tests passing. See [proposal and implementation details](GEMINI_FOUNDATION_PROPOSALS.md). The Opus record above remains the historical result of that earlier request.
+
+## Whole-repository review
+
+A subsequent user-requested review covered all353 tracked textual files at revision2a837b7 using Gemini3.8Flash. Codex verified findings and applied bounded subtitle/OAuth fixes. See [scope, findings and actual verification](WHOLE_REPOSITORY_REVIEW.md). Binary assets were inventoried rather than visually or audibly reviewed.

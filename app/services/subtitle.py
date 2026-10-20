@@ -222,6 +222,8 @@ def levenshtein_distance(s1, s2):
 
 
 def similarity(a, b):
+    if not a and not b:
+        return 1.0
     distance = levenshtein_distance(a.lower(), b.lower())
     max_length = max(len(a), len(b))
     return 1 - (distance / max_length)

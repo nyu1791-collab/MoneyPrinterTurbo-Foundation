@@ -1,0 +1,1667 @@
+{
+  "revision": "2a837b7f99326a6d39a227bd3f8629e431988b48",
+  "packets": {
+    "deployment_docs-1": [
+      {
+        "path": ".dockerignore",
+        "chars": 318
+      },
+      {
+        "path": ".gitattributes",
+        "chars": 259
+      },
+      {
+        "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+        "chars": 2814
+      },
+      {
+        "path": ".github/ISSUE_TEMPLATE/config.yml",
+        "chars": 27
+      },
+      {
+        "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+        "chars": 783
+      },
+      {
+        "path": ".github/SECURITY.md",
+        "chars": 1134
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "chars": 3866
+      },
+      {
+        "path": ".github/workflows/docker-ghcr.yml",
+        "chars": 1924
+      },
+      {
+        "path": ".gitignore",
+        "chars": 685
+      },
+      {
+        "path": ".python-version",
+        "chars": 5
+      },
+      {
+        "path": "Dockerfile",
+        "chars": 4809
+      },
+      {
+        "path": "Dockerfile.claude",
+        "chars": 881
+      },
+      {
+        "path": "Dockerfile.gpu",
+        "chars": 2271
+      },
+      {
+        "path": "LICENSE",
+        "chars": 1061
+      },
+      {
+        "path": "README-en.md",
+        "chars": 41343
+      },
+      {
+        "path": "README-ja.md",
+        "chars": 28449
+      },
+      {
+        "path": "README.md",
+        "chars": 28917
+      },
+      {
+        "path": "config.example.toml",
+        "chars": 33002
+      },
+      {
+        "path": "docker-compose.claude.yml",
+        "chars": 1529
+      },
+      {
+        "path": "docker-compose.gpu.yml",
+        "chars": 952
+      },
+      {
+        "path": "docker-compose.release.yml",
+        "chars": 875
+      },
+      {
+        "path": "docker-compose.yml",
+        "chars": 817
+      },
+      {
+        "path": "docs/FOUNDATION_DESIGN.md",
+        "chars": 5724
+      },
+      {
+        "path": "docs/GEMINI_FOUNDATION_PROPOSALS.md",
+        "chars": 2677
+      },
+      {
+        "path": "docs/MoneyPrinterTurbo.ipynb",
+        "chars": 8313
+      },
+      {
+        "path": "docs/artifact-metadata.md",
+        "chars": 836
+      },
+      {
+        "path": "docs/diagnostic-logging.md",
+        "chars": 1061
+      },
+      {
+        "path": "docs/gemini-proposal-receipt.json",
+        "chars": 1750
+      },
+      {
+        "path": "docs/local-image-server/README.md",
+        "chars": 5850
+      },
+      {
+        "path": "docs/local-image-server/policy.py",
+        "chars": 2462
+      },
+      {
+        "path": "docs/local-image-server/policy.toml",
+        "chars": 6210
+      },
+      {
+        "path": "docs/local-image-server/requirements.txt",
+        "chars": 201
+      },
+      {
+        "path": "docs/local-image-server/server.py",
+        "chars": 7081
+      },
+      {
+        "path": "docs/loomloom/moneyprinterturbo-ai-video-materials.template.json",
+        "chars": 2444
+      },
+      {
+        "path": "docs/loomloom/moneyprinterturbo-script-candidates.template.json",
+        "chars": 2456
+      },
+      {
+        "path": "docs/packaging.md",
+        "chars": 2357
+      },
+      {
+        "path": "docs/pypi-description.md",
+        "chars": 2660
+      },
+      {
+        "path": "docs/skill/SKILL.md",
+        "chars": 8324
+      },
+      {
+        "path": "docs/skill/mpt_agent.py",
+        "chars": 34463
+      },
+      {
+        "path": "docs/sponsors/byteplus-logo.svg",
+        "chars": 6403
+      },
+      {
+        "path": "docs/sponsors/infistar-logo.svg",
+        "chars": 11578
+      },
+      {
+        "path": "docs/sponsors/ofox-logo.svg",
+        "chars": 5034
+      },
+      {
+        "path": "docs/sponsors/picwish-logo.svg",
+        "chars": 4109
+      },
+      {
+        "path": "docs/sponsors/reccloud-logo.svg",
+        "chars": 1242
+      },
+      {
+        "path": "docs/sponsors/volcengine-logo.svg",
+        "chars": 1890
+      },
+      {
+        "path": "docs/vertex-proposal-receipt.json",
+        "chars": 663
+      },
+      {
+        "path": "docs/video-projects.md",
+        "chars": 7861
+      },
+      {
+        "path": "docs/voice-list.txt",
+        "chars": 12959
+      },
+      {
+        "path": "pyproject.toml",
+        "chars": 4028
+      },
+      {
+        "path": "requirements.txt",
+        "chars": 626
+      },
+      {
+        "path": "resource/public/index.html",
+        "chars": 573
+      },
+      {
+        "path": "webui.bat",
+        "chars": 2872
+      },
+      {
+        "path": "webui.sh",
+        "chars": 2642
+      }
+    ],
+    "core-1": [
+      {
+        "path": "app/__init__.py",
+        "chars": 55
+      },
+      {
+        "path": "app/__main__.py",
+        "chars": 88
+      },
+      {
+        "path": "app/asgi.py",
+        "chars": 10499
+      },
+      {
+        "path": "app/config/__init__.py",
+        "chars": 993
+      },
+      {
+        "path": "app/config/config.py",
+        "chars": 21786
+      },
+      {
+        "path": "app/controllers/base.py",
+        "chars": 2821
+      },
+      {
+        "path": "app/controllers/manager/base_manager.py",
+        "chars": 5354
+      },
+      {
+        "path": "app/controllers/manager/memory_manager.py",
+        "chars": 479
+      },
+      {
+        "path": "app/controllers/manager/redis_manager.py",
+        "chars": 7930
+      },
+      {
+        "path": "app/controllers/ping.py",
+        "chars": 231
+      },
+      {
+        "path": "app/controllers/v1/base.py",
+        "chars": 249
+      },
+      {
+        "path": "app/controllers/v1/llm.py",
+        "chars": 2517
+      },
+      {
+        "path": "app/controllers/v1/video.py",
+        "chars": 22578
+      },
+      {
+        "path": "app/doctor.py",
+        "chars": 3692
+      },
+      {
+        "path": "app/launcher.py",
+        "chars": 2968
+      },
+      {
+        "path": "app/models/__init__.py",
+        "chars": 0
+      },
+      {
+        "path": "app/models/const.py",
+        "chars": 592
+      },
+      {
+        "path": "app/models/exception.py",
+        "chars": 931
+      },
+      {
+        "path": "app/models/llm_provider.py",
+        "chars": 20625
+      },
+      {
+        "path": "app/models/schema.py",
+        "chars": 16742
+      },
+      {
+        "path": "app/paths.py",
+        "chars": 2561
+      },
+      {
+        "path": "app/router.py",
+        "chars": 448
+      },
+      {
+        "path": "app/services/__init__.py",
+        "chars": 0
+      },
+      {
+        "path": "app/services/data/azure_voices.json",
+        "chars": 21733
+      },
+      {
+        "path": "app/services/kimi_code_oauth.py",
+        "chars": 12116
+      },
+      {
+        "path": "app/services/llm.py",
+        "chars": 52960
+      },
+      {
+        "path": "app/services/utils/video_effects.py",
+        "chars": 4586
+      },
+      {
+        "path": "app/services/version_checker.py",
+        "chars": 6978
+      },
+      {
+        "path": "app/utils/file_security.py",
+        "chars": 1106
+      },
+      {
+        "path": "app/utils/logging_utils.py",
+        "chars": 5322
+      },
+      {
+        "path": "app/utils/request_logging.py",
+        "chars": 6938
+      },
+      {
+        "path": "app/utils/subtitle_reader.py",
+        "chars": 1738
+      },
+      {
+        "path": "app/utils/subtitle_writer.py",
+        "chars": 2304
+      },
+      {
+        "path": "app/utils/utils.py",
+        "chars": 16191
+      },
+      {
+        "path": "main.py",
+        "chars": 486
+      },
+      {
+        "path": "test/README.md",
+        "chars": 1789
+      },
+      {
+        "path": "test/__init__.py",
+        "chars": 29
+      },
+      {
+        "path": "test/services/__init__.py",
+        "chars": 32
+      },
+      {
+        "path": "test/services/test_api_authentication.py",
+        "chars": 3284
+      },
+      {
+        "path": "test/services/test_api_validation_json.py",
+        "chars": 2427
+      },
+      {
+        "path": "test/services/test_api_validation_message.py",
+        "chars": 1615
+      },
+      {
+        "path": "test/services/test_artifact_http_head.py",
+        "chars": 3140
+      },
+      {
+        "path": "test/services/test_artifact_uri_escaping.py",
+        "chars": 1053
+      },
+      {
+        "path": "test/services/test_asgi_cors.py",
+        "chars": 9974
+      },
+      {
+        "path": "test/services/test_asgi_static_files.py",
+        "chars": 4088
+      },
+      {
+        "path": "test/services/test_audio_export_volume.py",
+        "chars": 4448
+      },
+      {
+        "path": "test/services/test_audio_stage_terms.py",
+        "chars": 1725
+      },
+      {
+        "path": "test/services/test_azure_boundary_duration.py",
+        "chars": 2141
+      },
+      {
+        "path": "test/services/test_azure_file_publication.py",
+        "chars": 5151
+      },
+      {
+        "path": "test/services/test_azure_locale_escaping.py",
+        "chars": 1456
+      },
+      {
+        "path": "test/services/test_caption_timecodes.py",
+        "chars": 842
+      },
+      {
+        "path": "test/services/test_concat_manifest_isolation.py",
+        "chars": 2636
+      },
+      {
+        "path": "test/services/test_concat_model_default.py",
+        "chars": 3273
+      },
+      {
+        "path": "test/services/test_config.py",
+        "chars": 25051
+      },
+      {
+        "path": "test/services/test_config_flush_start.py",
+        "chars": 2131
+      },
+      {
+        "path": "test/services/test_config_initialization.py",
+        "chars": 6685
+      },
+      {
+        "path": "test/services/test_container_default_route_mask.py",
+        "chars": 645
+      },
+      {
+        "path": "test/services/test_controller_base.py",
+        "chars": 6123
+      },
+      {
+        "path": "test/services/test_controller_llm.py",
+        "chars": 3713
+      },
+      {
+        "path": "test/services/test_controller_ping.py",
+        "chars": 280
+      },
+      {
+        "path": "test/services/test_directory_creation.py",
+        "chars": 2173
+      },
+      {
+        "path": "test/services/test_edge_atomic_audio.py",
+        "chars": 2140
+      },
+      {
+        "path": "test/services/test_edge_backpressure.py",
+        "chars": 4259
+      },
+      {
+        "path": "test/services/test_finite_audio_parameters.py",
+        "chars": 1715
+      },
+      {
+        "path": "test/services/test_fish_audio.py",
+        "chars": 14238
+      },
+      {
+        "path": "test/services/test_fluxionai_llm.py",
+        "chars": 4844
+      },
+      {
+        "path": "test/services/test_foundation_doctor.py",
+        "chars": 5363
+      },
+      {
+        "path": "test/services/test_gemini_atomic_export.py",
+        "chars": 1604
+      },
+      {
+        "path": "test/services/test_generated_term_contract.py",
+        "chars": 1123
+      },
+      {
+        "path": "test/services/test_http_byte_range_grammar.py",
+        "chars": 1498
+      },
+      {
+        "path": "test/services/test_kimi_code_oauth.py",
+        "chars": 17460
+      },
+      {
+        "path": "test/services/test_kimi_login_review.py",
+        "chars": 6533
+      },
+      {
+        "path": "test/services/test_kokoro.py",
+        "chars": 6850
+      },
+      {
+        "path": "test/services/test_kokoro_integration.py",
+        "chars": 1962
+      },
+      {
+        "path": "test/services/test_legacy_timeline_separators.py",
+        "chars": 1403
+      },
+      {
+        "path": "test/services/test_llm.py",
+        "chars": 109114
+      },
+      {
+        "path": "test/services/test_llm_api_failures.py",
+        "chars": 1168
+      },
+      {
+        "path": "test/services/test_llm_formatted_empty_script_retry.py",
+        "chars": 792
+      },
+      {
+        "path": "test/services/test_llm_prose_json_boundaries.py",
+        "chars": 784
+      },
+      {
+        "path": "test/services/test_locale_encoding.py",
+        "chars": 495
+      },
+      {
+        "path": "test/services/test_media_accepted_audio_retries.py",
+        "chars": 2126
+      },
+      {
+        "path": "test/services/test_media_atomic_concat.py",
+        "chars": 1970
+      },
+      {
+        "path": "test/services/test_media_mimo_publication.py",
+        "chars": 3535
+      },
+      {
+        "path": "test/services/test_media_srt_publication.py",
+        "chars": 5865
+      },
+      {
+        "path": "test/services/test_mimo_paid_retries.py",
+        "chars": 1343
+      },
+      {
+        "path": "test/services/test_mpt_agent_skill.py",
+        "chars": 49530
+      },
+      {
+        "path": "test/services/test_nullable_narration_volume.py",
+        "chars": 1358
+      },
+      {
+        "path": "test/services/test_partial_batch_results.py",
+        "chars": 10302
+      },
+      {
+        "path": "test/services/test_pause_concat_completeness.py",
+        "chars": 2203
+      },
+      {
+        "path": "test/services/test_pexels_renditions.py",
+        "chars": 3728
+      },
+      {
+        "path": "test/services/test_pixabay_rendition_height.py",
+        "chars": 1030
+      },
+      {
+        "path": "test/services/test_posix_concat_paths.py",
+        "chars": 2117
+      },
+      {
+        "path": "test/services/test_queue_signature.py",
+        "chars": 2111
+      },
+      {
+        "path": "test/services/test_queued_preview_snapshot.py",
+        "chars": 1860
+      },
+      {
+        "path": "test/services/test_redis_delete_ownership.py",
+        "chars": 7897
+      },
+      {
+        "path": "test/services/test_redis_patch_ownership.py",
+        "chars": 1787
+      },
+      {
+        "path": "test/services/test_redis_queue_admission.py",
+        "chars": 3525
+      },
+      {
+        "path": "test/services/test_redis_short_form_requests.py",
+        "chars": 3402
+      },
+      {
+        "path": "test/services/test_render_parameter_validation.py",
+        "chars": 1468
+      },
+      {
+        "path": "test/services/test_response_payloads.py",
+        "chars": 530
+      },
+      {
+        "path": "test/services/test_retry_diagnostics.py",
+        "chars": 1995
+      }
+    ],
+    "core-2": [
+      {
+        "path": "test/services/test_schema.py",
+        "chars": 6656
+      },
+      {
+        "path": "test/services/test_script_markdown_link_labels.py",
+        "chars": 353
+      },
+      {
+        "path": "test/services/test_script_patch_concurrency.py",
+        "chars": 1764
+      },
+      {
+        "path": "test/services/test_script_semantic_hash_characters.py",
+        "chars": 800
+      },
+      {
+        "path": "test/services/test_siliconflow_volume_gain.py",
+        "chars": 1257
+      },
+      {
+        "path": "test/services/test_skill_case_insensitive_llm_provider.py",
+        "chars": 1635
+      },
+      {
+        "path": "test/services/test_skill_multiline_config_replacement.py",
+        "chars": 991
+      },
+      {
+        "path": "test/services/test_skill_prepared_script_preflight.py",
+        "chars": 1739
+      },
+      {
+        "path": "test/services/test_skill_spawn_failure_manifest.py",
+        "chars": 942
+      },
+      {
+        "path": "test/services/test_skill_transient_pexels_keys.py",
+        "chars": 1211
+      },
+      {
+        "path": "test/services/test_skill_whitespace_key_env_fallback.py",
+        "chars": 1445
+      },
+      {
+        "path": "test/services/test_social_error_text.py",
+        "chars": 2217
+      },
+      {
+        "path": "test/services/test_social_title_fallback.py",
+        "chars": 3249
+      },
+      {
+        "path": "test/services/test_srt_timestamp_rounding.py",
+        "chars": 977
+      },
+      {
+        "path": "test/services/test_standalone_upload_containers.py",
+        "chars": 1895
+      },
+      {
+        "path": "test/services/test_stream_empty_artifact.py",
+        "chars": 1165
+      },
+      {
+        "path": "test/services/test_stream_unverifiable_if_range.py",
+        "chars": 1396
+      },
+      {
+        "path": "test/services/test_upload_redirect_handle_native.py",
+        "chars": 1467
+      },
+      {
+        "path": "test/services/test_upload_response_recovery.py",
+        "chars": 1687
+      },
+      {
+        "path": "test/services/test_utils_ffmpeg_check.py",
+        "chars": 2527
+      },
+      {
+        "path": "test/services/test_version_checker.py",
+        "chars": 9287
+      },
+      {
+        "path": "test/services/test_voxcpm.py",
+        "chars": 12371
+      },
+      {
+        "path": "test/services/test_voxcpm_sse_leading_bom.py",
+        "chars": 584
+      },
+      {
+        "path": "test/services/test_voxcpm_stream_bounds.py",
+        "chars": 6269
+      },
+      {
+        "path": "test/services/test_voxcpm_truncated_reference.py",
+        "chars": 1444
+      },
+      {
+        "path": "test/services/test_youtube_audience.py",
+        "chars": 7158
+      },
+      {
+        "path": "test/services/test_zoom_alpha_alignment.py",
+        "chars": 1514
+      },
+      {
+        "path": "test/test_main.py",
+        "chars": 774
+      }
+    ],
+    "audio-1": [
+      {
+        "path": "app/services/bgm.py",
+        "chars": 14335
+      },
+      {
+        "path": "app/services/elevenlabs_music.py",
+        "chars": 14285
+      },
+      {
+        "path": "app/services/sonilo.py",
+        "chars": 15193
+      },
+      {
+        "path": "app/services/subtitle.py",
+        "chars": 11951
+      },
+      {
+        "path": "app/services/voice.py",
+        "chars": 145812
+      },
+      {
+        "path": "test/services/test_bgm.py",
+        "chars": 18047
+      },
+      {
+        "path": "test/services/test_bgm_decoded_audio.py",
+        "chars": 1142
+      },
+      {
+        "path": "test/services/test_bgm_final_fade.py",
+        "chars": 1928
+      },
+      {
+        "path": "test/services/test_bgm_list_race.py",
+        "chars": 667
+      },
+      {
+        "path": "test/services/test_compatible_speech_transport.py",
+        "chars": 1247
+      },
+      {
+        "path": "test/services/test_elevenlabs_catalog_pagination.py",
+        "chars": 4444
+      },
+      {
+        "path": "test/services/test_elevenlabs_music.py",
+        "chars": 23812
+      },
+      {
+        "path": "test/services/test_elevenlabs_speech_speed.py",
+        "chars": 6139
+      },
+      {
+        "path": "test/services/test_music_provider_redirects.py",
+        "chars": 3923
+      },
+      {
+        "path": "test/services/test_qualified_voice_identity.py",
+        "chars": 3487
+      },
+      {
+        "path": "test/services/test_remote_speech_complete_decode.py",
+        "chars": 3826
+      },
+      {
+        "path": "test/services/test_sonilo.py",
+        "chars": 25140
+      },
+      {
+        "path": "test/services/test_sonilo_event_bound.py",
+        "chars": 1607
+      },
+      {
+        "path": "test/services/test_speech_post_redirects.py",
+        "chars": 2256
+      },
+      {
+        "path": "test/services/test_subtitle.py",
+        "chars": 19368
+      },
+      {
+        "path": "test/services/test_subtitle_background_settings.py",
+        "chars": 5432
+      },
+      {
+        "path": "test/services/test_subtitle_canonical_unicode_matching.py",
+        "chars": 1050
+      },
+      {
+        "path": "test/services/test_subtitle_color_preflight.py",
+        "chars": 3611
+      },
+      {
+        "path": "test/services/test_subtitle_manual_wrap.py",
+        "chars": 1547
+      },
+      {
+        "path": "test/services/test_subtitle_publication_headers.py",
+        "chars": 935
+      },
+      {
+        "path": "test/services/test_subtitle_stage_result.py",
+        "chars": 2508
+      },
+      {
+        "path": "test/services/test_subtitle_wrap_attached_marks.py",
+        "chars": 778
+      },
+      {
+        "path": "test/services/test_subtitle_wrap_long_token_tail.py",
+        "chars": 1445
+      },
+      {
+        "path": "test/services/test_voice.py",
+        "chars": 105462
+      },
+      {
+        "path": "test/services/test_voice_timestamp_carry.py",
+        "chars": 680
+      },
+      {
+        "path": "test/services/test_voice_unspeakable_script_lines.py",
+        "chars": 1321
+      },
+      {
+        "path": "test/services/test_webui_bgm.py",
+        "chars": 24104
+      },
+      {
+        "path": "test/services/test_webui_voice_preview.py",
+        "chars": 23036
+      }
+    ],
+    "orchestration-1": [
+      {
+        "path": "app/services/cache_manager.py",
+        "chars": 7607
+      },
+      {
+        "path": "app/services/state.py",
+        "chars": 10598
+      },
+      {
+        "path": "app/services/task.py",
+        "chars": 70871
+      },
+      {
+        "path": "app/services/task_artifacts.py",
+        "chars": 2967
+      },
+      {
+        "path": "app/services/video.py",
+        "chars": 77052
+      },
+      {
+        "path": "app/services/video_project.py",
+        "chars": 35769
+      },
+      {
+        "path": "app/services/webui_task.py",
+        "chars": 7304
+      },
+      {
+        "path": "test/services/test_cache_manager.py",
+        "chars": 6267
+      },
+      {
+        "path": "test/services/test_concurrent_task_delete.py",
+        "chars": 3097
+      },
+      {
+        "path": "test/services/test_controller_video.py",
+        "chars": 36651
+      },
+      {
+        "path": "test/services/test_is_task_busy_string_state.py",
+        "chars": 2586
+      },
+      {
+        "path": "test/services/test_paid_video_provider_redirects.py",
+        "chars": 3927
+      },
+      {
+        "path": "test/services/test_state.py",
+        "chars": 15351
+      },
+      {
+        "path": "test/services/test_state_input_snapshot.py",
+        "chars": 887
+      },
+      {
+        "path": "test/services/test_state_string_values.py",
+        "chars": 2363
+      },
+      {
+        "path": "test/services/test_state_wrongtype.py",
+        "chars": 2585
+      },
+      {
+        "path": "test/services/test_task.py",
+        "chars": 103844
+      },
+      {
+        "path": "test/services/test_task_artifacts.py",
+        "chars": 4209
+      },
+      {
+        "path": "test/services/test_task_manager.py",
+        "chars": 25455
+      },
+      {
+        "path": "test/services/test_video.py",
+        "chars": 81556
+      },
+      {
+        "path": "test/services/test_video_color_tags.py",
+        "chars": 2412
+      },
+      {
+        "path": "test/services/test_video_effects.py",
+        "chars": 7562
+      },
+      {
+        "path": "test/services/test_video_project.py",
+        "chars": 29259
+      },
+      {
+        "path": "test/services/test_video_provider_duration_bounds.py",
+        "chars": 1046
+      },
+      {
+        "path": "test/services/test_video_reader_stdout.py",
+        "chars": 2758
+      },
+      {
+        "path": "test/services/test_video_term_items.py",
+        "chars": 2356
+      }
+    ],
+    "media-1": [
+      {
+        "path": "app/services/loomloom.py",
+        "chars": 38774
+      },
+      {
+        "path": "app/services/material.py",
+        "chars": 113259
+      },
+      {
+        "path": "app/services/material_cache.py",
+        "chars": 15261
+      },
+      {
+        "path": "app/services/material_upload.py",
+        "chars": 12200
+      },
+      {
+        "path": "app/services/metaso_minimax.py",
+        "chars": 16262
+      },
+      {
+        "path": "app/services/muapi.py",
+        "chars": 16306
+      },
+      {
+        "path": "app/services/ofox.py",
+        "chars": 16378
+      },
+      {
+        "path": "app/services/twelvelabs.py",
+        "chars": 7091
+      },
+      {
+        "path": "app/services/upload_post.py",
+        "chars": 16206
+      },
+      {
+        "path": "app/services/volcengine_seedance.py",
+        "chars": 16624
+      },
+      {
+        "path": "test/services/test_artifact_download_mime.py",
+        "chars": 1415
+      },
+      {
+        "path": "test/services/test_batch_material_allocation.py",
+        "chars": 7777
+      },
+      {
+        "path": "test/services/test_blank_material_terms.py",
+        "chars": 1284
+      },
+      {
+        "path": "test/services/test_download_complete_decode.py",
+        "chars": 1889
+      },
+      {
+        "path": "test/services/test_download_directory_race.py",
+        "chars": 1446
+      },
+      {
+        "path": "test/services/test_image_bilevel_pixel_range.py",
+        "chars": 619
+      },
+      {
+        "path": "test/services/test_image_exif_orientation.py",
+        "chars": 1517
+      },
+      {
+        "path": "test/services/test_image_gray_alpha_composition.py",
+        "chars": 746
+      },
+      {
+        "path": "test/services/test_image_motion.py",
+        "chars": 7177
+      },
+      {
+        "path": "test/services/test_image_sanitize_identity.py",
+        "chars": 2456
+      },
+      {
+        "path": "test/services/test_image_sanitize_pixel_snapshot.py",
+        "chars": 1788
+      },
+      {
+        "path": "test/services/test_image_submission_redirect.py",
+        "chars": 1954
+      },
+      {
+        "path": "test/services/test_image_uint16_pixel_range.py",
+        "chars": 725
+      },
+      {
+        "path": "test/services/test_image_zoom_pixel_revision_identity.py",
+        "chars": 889
+      },
+      {
+        "path": "test/services/test_local_image_policy.py",
+        "chars": 3156
+      },
+      {
+        "path": "test/services/test_local_image_server.py",
+        "chars": 7682
+      },
+      {
+        "path": "test/services/test_loom_download_staging_native.py",
+        "chars": 2930
+      },
+      {
+        "path": "test/services/test_loom_poll_deadline_native.py",
+        "chars": 1890
+      },
+      {
+        "path": "test/services/test_loomloom.py",
+        "chars": 29107
+      },
+      {
+        "path": "test/services/test_loomloom_pagination_cycles.py",
+        "chars": 2784
+      },
+      {
+        "path": "test/services/test_loomloom_request_redirects.py",
+        "chars": 3084
+      },
+      {
+        "path": "test/services/test_loomloom_script_result_types.py",
+        "chars": 1516
+      },
+      {
+        "path": "test/services/test_material.py",
+        "chars": 101027
+      },
+      {
+        "path": "test/services/test_material_cache.py",
+        "chars": 22236
+      },
+      {
+        "path": "test/services/test_material_cache_duration.py",
+        "chars": 1548
+      },
+      {
+        "path": "test/services/test_material_cache_replacement.py",
+        "chars": 4241
+      },
+      {
+        "path": "test/services/test_material_cover_picture.py",
+        "chars": 2108
+      },
+      {
+        "path": "test/services/test_material_openai_image.py",
+        "chars": 36557
+      },
+      {
+        "path": "test/services/test_material_source_preflight.py",
+        "chars": 1514
+      },
+      {
+        "path": "test/services/test_material_upload.py",
+        "chars": 18638
+      },
+      {
+        "path": "test/services/test_media_image_fallback.py",
+        "chars": 878
+      },
+      {
+        "path": "test/services/test_metaso_minimax.py",
+        "chars": 15109
+      },
+      {
+        "path": "test/services/test_minimax_output_container.py",
+        "chars": 1593
+      },
+      {
+        "path": "test/services/test_minimax_pcm_preflight.py",
+        "chars": 1717
+      },
+      {
+        "path": "test/services/test_minimax_success_retry.py",
+        "chars": 2785
+      },
+      {
+        "path": "test/services/test_muapi.py",
+        "chars": 15490
+      },
+      {
+        "path": "test/services/test_ofox.py",
+        "chars": 38560
+      },
+      {
+        "path": "test/services/test_serial_material_search.py",
+        "chars": 1271
+      },
+      {
+        "path": "test/services/test_twelvelabs.py",
+        "chars": 6985
+      },
+      {
+        "path": "test/services/test_twelvelabs_client_lifecycle.py",
+        "chars": 1775
+      },
+      {
+        "path": "test/services/test_twelvelabs_embedding_dimensions.py",
+        "chars": 1592
+      },
+      {
+        "path": "test/services/test_twelvelabs_invalid_embedding_native.py",
+        "chars": 3104
+      }
+    ],
+    "media-2": [
+      {
+        "path": "test/services/test_upload_post.py",
+        "chars": 19324
+      },
+      {
+        "path": "test/services/test_upload_post_account_snapshot.py",
+        "chars": 5389
+      },
+      {
+        "path": "test/services/test_upload_post_missing_platform.py",
+        "chars": 2265
+      },
+      {
+        "path": "test/services/test_upload_post_privacy_fallback.py",
+        "chars": 2170
+      },
+      {
+        "path": "test/services/test_upload_post_timeout_id.py",
+        "chars": 3654
+      },
+      {
+        "path": "test/services/test_volcengine_seedance.py",
+        "chars": 37392
+      },
+      {
+        "path": "test/services/test_webui_image_motion.py",
+        "chars": 4912
+      },
+      {
+        "path": "test/services/test_webui_local_material_upload.py",
+        "chars": 4427
+      },
+      {
+        "path": "test/services/test_webui_loomloom.py",
+        "chars": 22190
+      },
+      {
+        "path": "test/services/test_webui_loomloom_regressions.py",
+        "chars": 14262
+      },
+      {
+        "path": "test/services/test_webui_material_picker_formats.py",
+        "chars": 2188
+      },
+      {
+        "path": "test/services/test_webui_metaso_minimax.py",
+        "chars": 4949
+      },
+      {
+        "path": "test/services/test_webui_muapi.py",
+        "chars": 2176
+      },
+      {
+        "path": "test/services/test_webui_ofox.py",
+        "chars": 2169
+      },
+      {
+        "path": "test/services/test_webui_ofox_placement.py",
+        "chars": 2968
+      },
+      {
+        "path": "test/services/test_webui_seedance.py",
+        "chars": 2253
+      },
+      {
+        "path": "test/services/test_webui_upload_post_settings.py",
+        "chars": 5274
+      }
+    ],
+    "interfaces-1": [
+      {
+        "path": "cli.py",
+        "chars": 64152
+      },
+      {
+        "path": "test/services/test_cli.py",
+        "chars": 86851
+      },
+      {
+        "path": "test/services/test_cli_stage_files.py",
+        "chars": 1661
+      },
+      {
+        "path": "test/services/test_clip_speed.py",
+        "chars": 965
+      },
+      {
+        "path": "test/services/test_combine_clip_isolation.py",
+        "chars": 2715
+      },
+      {
+        "path": "test/services/test_llm_client_cleanup.py",
+        "chars": 3050
+      },
+      {
+        "path": "test/services/test_packaging.py",
+        "chars": 6038
+      },
+      {
+        "path": "test/services/test_request_logging.py",
+        "chars": 13081
+      },
+      {
+        "path": "test/services/test_short_clip_transitions.py",
+        "chars": 2699
+      },
+      {
+        "path": "test/services/test_webui_audio_staging.py",
+        "chars": 4801
+      },
+      {
+        "path": "test/services/test_webui_catalan.py",
+        "chars": 3436
+      },
+      {
+        "path": "test/services/test_webui_custom_audio_upload.py",
+        "chars": 4536
+      },
+      {
+        "path": "test/services/test_webui_font_catalog.py",
+        "chars": 2824
+      },
+      {
+        "path": "test/services/test_webui_generation_defaults.py",
+        "chars": 19076
+      },
+      {
+        "path": "test/services/test_webui_grouped_select.py",
+        "chars": 6430
+      },
+      {
+        "path": "test/services/test_webui_headless_task_actions.py",
+        "chars": 2845
+      },
+      {
+        "path": "test/services/test_webui_i18n.py",
+        "chars": 15394
+      },
+      {
+        "path": "test/services/test_webui_kokoro.py",
+        "chars": 3572
+      },
+      {
+        "path": "test/services/test_webui_llm_settings.py",
+        "chars": 20902
+      },
+      {
+        "path": "test/services/test_webui_logging_settings.py",
+        "chars": 1880
+      },
+      {
+        "path": "test/services/test_webui_settings_transfer.py",
+        "chars": 15854
+      },
+      {
+        "path": "test/services/test_webui_startup.py",
+        "chars": 2322
+      },
+      {
+        "path": "test/services/test_webui_task.py",
+        "chars": 28820
+      },
+      {
+        "path": "test/services/test_webui_task_history.py",
+        "chars": 8467
+      },
+      {
+        "path": "test/services/test_webui_tts_settings.py",
+        "chars": 15109
+      },
+      {
+        "path": "webui/.streamlit/config.toml",
+        "chars": 105
+      }
+    ],
+    "interfaces-2": [
+      {
+        "path": "webui/Main.py",
+        "chars": 334480
+      },
+      {
+        "path": "webui/i18n/az.json",
+        "chars": 36412
+      },
+      {
+        "path": "webui/i18n/ca.json",
+        "chars": 35408
+      },
+      {
+        "path": "webui/i18n/de.json",
+        "chars": 36739
+      },
+      {
+        "path": "webui/i18n/en.json",
+        "chars": 67416
+      },
+      {
+        "path": "webui/i18n/es.json",
+        "chars": 35969
+      },
+      {
+        "path": "webui/i18n/fr.json",
+        "chars": 37128
+      },
+      {
+        "path": "webui/i18n/id.json",
+        "chars": 34076
+      }
+    ],
+    "interfaces-3": [
+      {
+        "path": "webui/i18n/it.json",
+        "chars": 37284
+      },
+      {
+        "path": "webui/i18n/ko.json",
+        "chars": 25754
+      },
+      {
+        "path": "webui/i18n/pt.json",
+        "chars": 35441
+      },
+      {
+        "path": "webui/i18n/ru.json",
+        "chars": 34512
+      },
+      {
+        "path": "webui/i18n/tr.json",
+        "chars": 34406
+      },
+      {
+        "path": "webui/i18n/vi.json",
+        "chars": 33096
+      },
+      {
+        "path": "webui/i18n/zh.json",
+        "chars": 45344
+      },
+      {
+        "path": "webui/kimi_login.py",
+        "chars": 6900
+      },
+      {
+        "path": "webui/styles.css",
+        "chars": 12831
+      }
+    ]
+  },
+  "excluded": [
+    {
+      "path": "docs/api.jpg",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/sponsors/apimart-logo.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/sponsors/astraflow-logo.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/sponsors/ccsub-logo.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/sponsors/metaso-logo.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/sponsors/runninghub-logo.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/sponsors/shengsuanyun-logo.jpg",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/webui-en.jpg",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "docs/webui.jpg",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/BeVietnamPro-Bold.ttf",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/BeVietnamPro-Medium.ttf",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/Charm-Bold.ttf",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/Charm-Regular.ttf",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/MicrosoftYaHeiBold.ttc",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/MicrosoftYaHeiNormal.ttc",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/STHeitiLight.ttc",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/STHeitiMedium.ttc",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/fonts/UTM Kabel KT.ttf",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output000.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output001.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output002.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output003.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output004.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output005.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output006.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output007.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output008.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output009.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output010.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output011.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output012.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output013.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output014.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output015.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output016.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output017.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output018.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output019.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output020.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output021.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output022.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output023.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output024.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output025.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output027.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output028.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "resource/songs/output029.mp3",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/1.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/2.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/3.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/4.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/5.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/6.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/7.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/8.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "test/resources/9.png",
+      "reason": "binary asset; no visual/media execution requested"
+    },
+    {
+      "path": "uv.lock",
+      "reason": "generated dependency lock: verify frozen synchronization separately"
+    }
+  ]
+}

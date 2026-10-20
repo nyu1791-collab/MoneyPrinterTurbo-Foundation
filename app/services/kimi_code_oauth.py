@@ -170,7 +170,7 @@ def request_device_code(region: str) -> dict:
     if response.status_code != 200:
         raise ValueError(
             f"kimi_code: device code request failed "
-            f"({response.status_code}): {response.text[:300]}"
+            f"(HTTP {response.status_code}); provider response omitted"
         )
     data = _json_or_raise(response, "device authorization")
     for field in ("device_code", "user_code", "verification_uri_complete"):
@@ -182,12 +182,18 @@ def request_device_code(region: str) -> dict:
 
 def _json_or_raise(response, what: str) -> dict:
     try:
-        return response.json()
+        data = response.json()
     except ValueError:
         raise ValueError(
             f"kimi_code: {what} returned a non-JSON response "
-            f"(HTTP {response.status_code}): {response.text[:200]}"
+            f"(HTTP {response.status_code}); provider response omitted"
         ) from None
+    if not isinstance(data, dict):
+        raise ValueError(
+            f"kimi_code: {what} must return a JSON object "
+            f"(HTTP {response.status_code}); provider response omitted"
+        )
+    return data
 
 
 def poll_token(region: str, device_code: str) -> dict:
@@ -227,7 +233,7 @@ def poll_token(region: str, device_code: str) -> dict:
         return {"denied": True}
     raise ValueError(
         f"kimi_code: token request failed: "
-        f"{data.get('error_description') or data.get('error') or data}"
+        f"(HTTP {response.status_code}); provider response omitted"
     )
 
 
@@ -248,7 +254,7 @@ def _refresh(region: str, refresh_token: str) -> dict:
     if not data.get("access_token"):
         raise ValueError(
             f"kimi_code: token refresh failed: "
-            f"{data.get('error_description') or data.get('error') or data}"
+            f"(HTTP {response.status_code}); provider response omitted"
         )
     return data
 

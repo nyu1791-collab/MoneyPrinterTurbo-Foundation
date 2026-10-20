@@ -129,7 +129,7 @@ class TestKimiCodeOAuth(unittest.TestCase):
         self.assertEqual(self._poll(payload), payload)
 
     def test_poll_unknown_error_raises(self):
-        with self.assertRaisesRegex(ValueError, "bad thing"):
+        with self.assertRaisesRegex(ValueError, "token request failed"):
             self._poll({"error": "unknown", "error_description": "bad thing"})
 
     def test_poll_non_json_raises_diagnosable(self):
