@@ -89,8 +89,8 @@ COPY requirements.txt ./
 RUN if [ "$PIP_USE_OFFICIAL" = "1" ]; then \
         pip install --no-cache-dir --retries 3 --timeout 60 -r requirements.txt; \
     else \
-        pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com --retries 3 --timeout 60 -r requirements.txt || \
-        pip install --no-cache-dir -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/ --trusted-host mirrors.tuna.tsinghua.edu.cn --retries 3 --timeout 60 -r requirements.txt || \
+        pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ --retries 3 --timeout 60 -r requirements.txt || \
+        pip install --no-cache-dir -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/ --retries 3 --timeout 60 -r requirements.txt || \
         pip install --no-cache-dir --retries 3 --timeout 60 -r requirements.txt; \
     fi
 
