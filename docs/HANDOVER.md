@@ -11,7 +11,11 @@
   - [WHOLE_REPOSITORY_REVIEW.md](WHOLE_REPOSITORY_REVIEW.md): Gemini 3.8 Flash による全 353 テキストファイルの静的レビュー。照合して採用した指摘のみ修正。不採用の 10 件は理由付きで記録。
   - [GEMINI_FOUNDATION_PROPOSALS.md](GEMINI_FOUNDATION_PROPOSALS.md): その前段の提案と修正。
   - [FOUNDATION_DESIGN.md](FOUNDATION_DESIGN.md): 設計と検証の経緯。Opus 提案は HTTP 429（クォータ 0 RPM）で未取得。
-- 「アルゴン（Argon）」による査読の記録は、リポジトリ、PR（0 件）、オープンな Issue（0 件）のいずれにも見当たらない。
+- 「アルゴン（Argon）」による査読の記録は見つかっていない。探した範囲は次のとおり。
+  - このアカウント配下の 5 リポジトリ（`MoneyPrinterTurbo-Foundation`、`voiceBox-Pipeline`、`ai-army-private-backup-20261013`、`line-rangers-pvp`、`discord-digital-delivery`）の追跡ファイルと、`voiceBox-Pipeline` の CLI・文書。Antigravity CLI の接続手順は見つかったが、査読の本文はない。
+  - VM（`n_yu1791`）のホーム配下（深さ 6）のファイル名とファイル内容。該当なし。
+  - PR（0 件）、オープンな Issue（0 件）。
+- **外部への査読送信は行わない（2026-10-21 決定）**。対象 25 件の読み取りと集計が自動安全判定により拒否されたため、送信の準備を中止した。送信も行っていない。
 
 ## 2. 検証結果
 
@@ -74,7 +78,7 @@
 1. GitHub の Actions 設定を確認する。このブランチで CI を走らせるには PR か `main` への反映が要る。PR の作成はオーナーの承認後。
 2. 国内ミラー経路（`DOCKER_BUILD_MIRROR=china`）でも build を通す。
 3. Opus のクォータ解消後に提案を取得し、採否を記録する。
-4. 「Argon」（Antigravity API 経由）の査読結果を、このセッションから参照できる形にする。現時点ではツールが無く、内容を取得できていない。
+4. Antigravity による外部査読は、今回は実施しない。将来行う場合は、送信対象・送信先・承認範囲を先に決め、その承認のもとで実施する。対象一覧（25 件）は作成済みだが、送信はしていない。
 
 ## 6. 再現コマンド
 
