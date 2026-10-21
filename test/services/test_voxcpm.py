@@ -225,7 +225,7 @@ def test_prepare_voxcpm_reference_audio_bounds_conversion_and_cleans_temps(monke
             wav_file.setsampwidth(2)
             wav_file.setframerate(16000)
             wav_file.writeframes(b"\x00\x00" * 160)
-        return SimpleNamespace(returncode=0)
+        return SimpleNamespace(returncode=0, stderr=b"")
 
     monkeypatch.setattr(voice.subprocess, "run", convert)
 
@@ -233,6 +233,22 @@ def test_prepare_voxcpm_reference_audio_bounds_conversion_and_cleans_temps(monke
 
     assert normalized == _wav_bytes()
     assert all(not path.exists() for path in temporary_paths)
+
+
+def test_prepare_voxcpm_reference_audio_rejects_stderr_errors_when_ffmpeg_exits_zero(monkeypatch):
+    def convert(command, **_kwargs):
+        output_path = Path(command[-1])
+        with wave.open(str(output_path), "wb") as wav_file:
+            wav_file.setnchannels(1)
+            wav_file.setsampwidth(2)
+            wav_file.setframerate(16000)
+            wav_file.writeframes(b"\x00\x00" * 160)
+        return SimpleNamespace(returncode=0, stderr=b"[mp3float] Header missing\n")
+
+    monkeypatch.setattr(voice.subprocess, "run", convert)
+
+    with pytest.raises(ValueError, match="decodable audio stream"):
+        voice.prepare_voxcpm_reference_audio(b"damaged-reference", ".mp3")
 
 
 def test_prepare_voxcpm_reference_audio_rejects_oversized_upload(monkeypatch):

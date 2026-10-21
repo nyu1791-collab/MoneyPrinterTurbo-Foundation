@@ -66,3 +66,7 @@ The user subsequently selected Gemini 3.8 Flash. It returned source-grounded pro
 ## Whole-repository review
 
 A subsequent user-requested review covered all353 tracked textual files at revision2a837b7 using Gemini3.8Flash. Codex verified findings and applied bounded subtitle/OAuth fixes. See [scope, findings and actual verification](WHOLE_REPOSITORY_REVIEW.md). Binary assets were inventoried rather than visually or audibly reviewed.
+
+## Handover
+
+Current status, the FFmpeg-build defect fixed during handover, and open items are in [HANDOVER.md](HANDOVER.md). The earlier sandbox report of 49 failures was not reproduced in the handover run, where the full suite passed with both the system and bundled FFmpeg builds.

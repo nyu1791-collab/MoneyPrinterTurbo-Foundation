@@ -15,6 +15,10 @@ change the order in the manifest to reorder the video.
 ## Requirements
 
 Python 3.11 or newer and FFmpeg/FFprobe on PATH, including the `libx264` encoder.
+The renderer needs FFmpeg 4.4 or newer because it uses `amix` with `normalize`;
+FFmpeg 4.3.x fails with `Option 'normalize' not found`. The full test suite passed
+with FFmpeg 6.1.1 and 7.0.2, and the renderer and color-tag tests also pass with
+5.1.9.
 Prepared inputs must be standalone encoded media: MOV/MP4, Matroska/WebM, AVI,
 MPEG-TS/video, Ogg, FLV, WAV, MP3, FLAC or AAC. HLS/DASH/concat playlists and
 external-reference media are rejected; copying only a playlist would not snapshot

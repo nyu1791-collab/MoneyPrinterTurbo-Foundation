@@ -150,6 +150,11 @@ def _validate_audio(file_path: str, timeout_seconds: int = 30) -> None:
     FFprobe，因此不能新增独立二进制依赖。`-map 0:a:0` 会在没有音频流时失败，
     `-xerror` 会把解码错误提升为失败；完整解码还能拦截加密文件或随机数据偶然
     命中音频帧头的误判。文件可以包含专辑封面等附加流，但只校验第一条音频流。
+
+    不同 FFmpeg 构建对 `-xerror` 的退出码并不一致：部分构建在 MP3 帧损坏时
+    仍返回 0，但会把错误写到 stderr。因此任何 stderr 错误输出都视为失败。
+    帧数统计使用 framemd5，而不是进度时间戳；极短的无声音频在部分构建下进度
+    时间戳会停留在 0，却确实包含可解码的帧。
     """
     try:
         decoded = subprocess.run(
@@ -173,11 +178,10 @@ def _validate_audio(file_path: str, timeout_seconds: int = 30) -> None:
                 # WAV can exit successfully without producing any audio.
                 "-af",
                 "asetpts=N/SR/TB",
-                "-progress",
-                "pipe:1",
                 "-nostats",
+                # One data line per decoded frame; '#' lines are headers only.
                 "-f",
-                "null",
+                "framemd5",
                 "-",
             ],
             capture_output=True,
@@ -188,17 +192,12 @@ def _validate_audio(file_path: str, timeout_seconds: int = 30) -> None:
         raise BgmServiceError("FFmpeg background music validation timed out") from exc
     except OSError as exc:
         raise BgmServiceError("failed to run FFmpeg for background music validation") from exc
-    if decoded.returncode != 0:
+    if decoded.returncode != 0 or decoded.stderr.strip():
         raise BgmUploadError("uploaded file must contain a decodable audio stream")
-    decoded_audio = False
-    for line in decoded.stdout.splitlines():
-        key, separator, value = line.partition(b"=")
-        if separator and key == b"out_time_us":
-            try:
-                decoded_audio = decoded_audio or int(value) > 0
-            except ValueError:
-                continue
-    if not decoded_audio:
+    decoded_frames = sum(
+        1 for line in decoded.stdout.splitlines() if line and not line.startswith(b"#")
+    )
+    if decoded_frames == 0:
         raise BgmUploadError("uploaded file must contain nonempty decodable audio")
 
 

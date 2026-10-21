@@ -64,3 +64,37 @@ def test_oauth_errors_omit_provider_bodies_and_descriptions(operation, invalid_j
         invoke_oauth(operation)
     assert "PRIVATE" not in str(caught.value)
     assert "HTTP" in str(caught.value)
+
+
+@pytest.mark.parametrize("operation", ["device", "poll", "refresh"])
+def test_oauth_errors_keep_standard_error_identifier_only(operation):
+    response = ProviderResponse(
+        {"error": "invalid_grant", "error_description": "PRIVATE_DESCRIPTION"},
+        status=400 if operation == "device" else 200,
+    )
+    with (
+        patch.object(oauth, "_identity_headers", return_value={}),
+        patch.object(oauth.requests, "post", return_value=response),
+        pytest.raises(ValueError) as caught,
+    ):
+        invoke_oauth(operation)
+    message = str(caught.value)
+    assert "error=invalid_grant" in message
+    assert "HTTP" in message
+    assert "PRIVATE" not in message
+
+
+@pytest.mark.parametrize("operation", ["device", "poll", "refresh"])
+def test_oauth_unknown_error_identifier_is_not_echoed(operation):
+    response = ProviderResponse(
+        {"error": "PRIVATE_ERROR_CODE"},
+        status=400 if operation == "device" else 200,
+    )
+    with (
+        patch.object(oauth, "_identity_headers", return_value={}),
+        patch.object(oauth.requests, "post", return_value=response),
+        pytest.raises(ValueError) as caught,
+    ):
+        invoke_oauth(operation)
+    assert "error=" not in str(caught.value)
+    assert "PRIVATE" not in str(caught.value)

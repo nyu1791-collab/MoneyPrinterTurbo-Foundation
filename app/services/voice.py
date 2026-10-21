@@ -3152,7 +3152,12 @@ def prepare_voxcpm_reference_audio(uploaded_audio: bytes, suffix: str = "") -> b
                 timeout=VOXCPM_REFERENCE_AUDIO_CONVERSION_TIMEOUT_SECONDS,
                 check=False,
             )
-            if result.returncode != 0 or not os.path.isfile(output_path):
+            # Same rule as the BGM validator: some FFmpeg builds exit 0 on damaged input.
+            if (
+                result.returncode != 0
+                or result.stderr.strip()
+                or not os.path.isfile(output_path)
+            ):
                 raise ValueError(
                     "reference audio must contain a decodable audio stream"
                 )

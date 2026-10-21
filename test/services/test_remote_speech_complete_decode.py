@@ -26,7 +26,7 @@ def test_accepted_audio_requires_full_decode_and_preserves_previous_export(tmp_p
     with AudioFileClip(str(probe)) as clip:
         assert clip.duration > 0
     decoded = subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-xerror", "-i", str(probe), "-f", "null", "-"], capture_output=True)
-    assert (decoded.returncode != 0) == corrupt
+    assert (decoded.returncode != 0 or bool(decoded.stderr.strip())) == corrupt
     seen = []
 
     class Handler(BaseHTTPRequestHandler):

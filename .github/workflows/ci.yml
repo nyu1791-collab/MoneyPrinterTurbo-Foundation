@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -75,10 +76,13 @@ jobs:
       - name: Install FFmpeg for native revision-rendering tests
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Run native revision-rendering tests
+      - name: Run native rendering and media-validation tests
         run: >-
           uv run --no-sync python -X utf8 -m coverage run --append -m pytest -q
           test/services/test_video_project.py test/services/test_minimax_output_container.py
+          test/services/test_bgm.py test/services/test_bgm_decoded_audio.py
+          test/services/test_material_upload.py test/services/test_remote_speech_complete_decode.py
+          test/services/test_voxcpm.py test/services/test_review_boundaries.py
 
       - name: Report test coverage
         run: uv run --no-sync python -m coverage report

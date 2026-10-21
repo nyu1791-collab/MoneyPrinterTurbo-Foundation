@@ -394,7 +394,7 @@ class TestMaterialUploadService(unittest.TestCase):
             self.assertEqual(os.listdir(temp_dir), [])
 
     def test_video_validation_uses_configured_ffmpeg_and_video_stream(self):
-        completed = SimpleNamespace(returncode=0)
+        completed = SimpleNamespace(returncode=0, stderr=b"")
         with (
             patch.object(
                 material_upload.Image,
@@ -417,6 +417,21 @@ class TestMaterialUploadService(unittest.TestCase):
         self.assertIn("0:V:0", command)
         self.assertIn("-xerror", command)
         self.assertNotIn("ffprobe", " ".join(command).lower())
+
+    def test_video_validation_rejects_stderr_errors_when_ffmpeg_exits_zero(self):
+        completed = SimpleNamespace(returncode=0, stderr=b"[h264] corrupt frame\n")
+        with (
+            patch.object(
+                material_upload.Image,
+                "open",
+                side_effect=UnidentifiedImageError("not an image"),
+            ),
+            patch.object(
+                material_upload.subprocess, "run", return_value=completed
+            ),
+        ):
+            with self.assertRaises(material_upload.MaterialUploadError):
+                material_upload._validate_video("/tmp/clip.mp4")
 
     def test_video_validation_distinguishes_invalid_media_from_tool_failure(self):
         image_error = UnidentifiedImageError("not an image")
