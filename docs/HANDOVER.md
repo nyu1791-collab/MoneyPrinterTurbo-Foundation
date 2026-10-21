@@ -2,7 +2,8 @@
 
 対象: `nyu1791-collab/MoneyPrinterTurbo-Foundation`（上流 harry0703/MoneyPrinterTurbo の独立フォーク）
 作業ブランチ: `ccr-3b1e161a-pbc8r8`（開始時点の `main` と同じ `552bdba`）
-確認日: 2026-10-20 UTC
+初回確認日: 2026-10-20 UTC  
+最新の解決状況は §7（2026-10-21 UTC）を参照。§1〜6は初回引き継ぎ時点の履歴。
 
 ## 1. 現状
 
@@ -90,3 +91,49 @@ MPT_TEST_REDIS_HOST=127.0.0.1 MPT_TEST_REDIS_PORT=6379 MPT_TEST_REDIS_DB=15 \
 # 別の ffmpeg で再確認する場合は、その実行ファイルを PATH の先頭に置くか、
 # IMAGEIO_FFMPEG_EXE にパスを指定する
 ```
+
+
+## 7. GitHub上での引き継ぎ完了確認（2026-10-21 UTC）
+
+- リポジトリのActions設定はAPIで `enabled=false` を確認し、オーナーの依頼に基づいて有効化した。既存の許可方式は維持した。
+- PR #1をCI成功後に通常のmergeでmainへ統合した。ブランチ保護の解除やadmin強制マージはしていない。
+- CIに手動起動を追加。Dockerの手動起動にはmirrorとplatformsの選択を追加し、公開は引き続き `publish=true` の明示指定だけ。
+- 国内PyPI経路から `--trusted-host` を外し、HTTPSの証明書検証を有効なまま確認した。
+- 外部査読の見送りを維持した。Argonへのソース送信・Opus提案の再依頼はしていない。Vertexのクォータ解消も確認していない。
+
+### CIの実測値
+
+確認ソース: `9a1ee100c1597554f574e27af75a0fab76a281fb`。 [CI実行](https://github.com/nyu1791-collab/MoneyPrinterTurbo-Foundation/actions/runs/39546409491)。
+
+
+最初の全体実行は既存どおりポータブルFFmpeg経路を維持する。その後にシステムFFmpegを導入し、
+動画プロジェクトだけでなくBGM・素材検証・音声完全デコード・VoxCPM・境界条件の既存テストも再実行する。
+以下はフェーズ別の件数であり、同じテストの再実行を含むため単純合算しない。スキップは検証済みに含めない。
+以前のローカル環境の2469 passed / 19 skippedと、GitHub runnerの件数を同一条件と扱わない。
+
+| 環境・フェーズ | 実測結果 |
+| --- | --- |
+| Python 3.11 tests / Run unit tests with coverage | 2381 passed, 107 skipped, 22 warnings, 10960 subtests passed in 550.94s (0:09:10) |
+| Python 3.11 tests / Run native rendering and media-validation tests | 162 passed, 1 warning, 106 subtests passed in 45.46s |
+| Python 3.11 tests / Report test coverage | TOTAL                                      16228   2101   5470    890    85% |
+| Python 3.13 tests / Run unit tests with coverage | 2381 passed, 107 skipped, 21 warnings, 10960 subtests passed in 663.11s (0:11:03) |
+| Python 3.13 tests / Run native rendering and media-validation tests | 162 passed, 106 subtests passed in 48.61s |
+| Python 3.13 tests / Report test coverage | TOTAL                                      16228   2101   5470    890    85% |
+| Windows smoke tests / Run core service smoke tests | 252 passed, 5 skipped, 3 warnings, 81 subtests passed in 15.19s |
+
+### chinaミラーのDocker build
+
+[ビルド実行](https://github.com/nyu1791-collab/MoneyPrinterTurbo-Foundation/actions/runs/39545013369)、ソース `1fc1f22f0cec75322d37c164f9a7d6f8dad2e2a3`。
+`linux/amd64`、`DOCKER_BUILD_MIRROR=china`、`PIP_USE_OFFICIAL=0` で成功した。
+命令の表示文字列ではなく、実際のAPTのGet行とpipのindex・インストール結果から、Aliyun経路の成功を確認した。
+Tsinghua・公式Debianへのフォールバック実行は観測されなかった。
+GitHub-hosted runnerで公式bookwormベースをそのまま使用し、以前のサンドボックス専用CAベースは使っていない。
+後続のCI対象コミットとの差分はCIの既存テスト実行範囲だけで、Dockerfile・依存定義・アプリコードは同一。
+
+GHCRログインはskipped、buildxの実コマンドにpush指定なし。コンテナの公開はしていない。
+この実行はビルドの確認であり、イメージのロード、実音声・動画生成、本番配備やarm64の動作確認ではない。
+
+### 今後の扱い
+
+コード更新時は有効化済みのCIで確認する。コンテナ公開、実アカウントを使う生成・投稿、
+新たな外部モデル査読は、それぞれ具体的な依頼があるときに扱う。
