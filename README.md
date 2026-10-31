@@ -1,3 +1,5 @@
+新しいWindows PCへの導入・素材移行・投稿用素材パックは [PC移行ガイド](workstation/README.md) を参照してください。既存の制作入口とモデルは維持します。
+
 > **Independent Foundation fork / 独立した派生版**<br>
 > Maintained at [nyu1791-collab/MoneyPrinterTurbo-Foundation](https://github.com/nyu1791-collab/MoneyPrinterTurbo-Foundation).<br>
 > Based on [harry0703/MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo), MIT; upstream history and attribution retained.<br>

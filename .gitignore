@@ -45,3 +45,18 @@ htmlcov/
 
 # Claude Code 订阅令牌（docker compose 自动读取），禁止提交
 .env
+
+# PC-local optional automation state
+.venv-research/
+workstation/local.json
+workstation/*.local.json
+
+__pycache__/
+
+*.pyc
+
+.venv/
+
+.ruff_cache/
+
+.pytest_cache/
