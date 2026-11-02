@@ -147,11 +147,21 @@ def _task_response_data(task: dict, endpoint: str, task_dir: str, request_id: st
                 _task_file_to_uri(file, endpoint, task_dir, request_id)
                 for file in task[key]
             ]
-    for key in ("audio_file", "subtitle_path"):
+    for key in ("audio_file", "subtitle_path", "language_manifest"):
         if task.get(key):
             response_task[key] = _task_file_to_uri(
                 task[key], endpoint, task_dir, request_id
             )
+    if task.get("language_results"):
+        response_task["language_results"] = {}
+        for code, item in task["language_results"].items():
+            converted = dict(item)
+            for key in ("audio_file", "subtitle_path", "script"):
+                if item.get(key):
+                    converted[key] = _task_file_to_uri(item[key], endpoint, task_dir, request_id)
+            converted["videos"] = [_task_file_to_uri(p, endpoint, task_dir, request_id)
+                                    for p in item.get("videos", [])]
+            response_task["language_results"][code] = converted
     return response_task
 
 

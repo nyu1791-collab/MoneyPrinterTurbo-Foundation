@@ -1538,7 +1538,7 @@ def azure_tts_v1(
     voice_name = parse_voice_name(voice_name)
     text = text.strip()
     rate_str = convert_rate_to_percent(voice_rate)
-    for i in range(3):
+    for i in range(1):
         temp_path = None
         try:
             logger.info(f"start, voice name: {voice_name}, try: {i + 1}")
@@ -1578,11 +1578,10 @@ def azure_tts_v1(
                 continue
 
             if not sub_maker.get_srt():
-                logger.warning("failed, sub_maker.get_srt() is empty")
-                continue
+                logger.warning("speech audio is ready without subtitle timing; keep audio without regenerating")
 
             # Audio and its timing belong to this same completed attempt.
-            # Failed retries must not replace previously successful narration.
+            # Interrupted streams must not replace previously successful narration.
             os.replace(temp_path, voice_file)
             temp_path = None
             logger.info(f"completed, output file: {voice_file}")

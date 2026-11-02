@@ -1702,6 +1702,11 @@ def _run_pipeline(
 
     sm.state.update_task(task_id, state=const.TASK_STATE_PROCESSING, progress=20)
 
+    if getattr(params, "multilingual_enabled", False) and stop_at in {"audio", "subtitle", "video"}:
+        from app.services.multilingual import produce_languages
+        return produce_languages(task_id, params, video_script, video_terms, stop_at,
+                                 voice_preview=voice_preview)
+
     # 3. Generate audio
     generate_audio_kwargs = {
         "voice_preview": voice_preview,

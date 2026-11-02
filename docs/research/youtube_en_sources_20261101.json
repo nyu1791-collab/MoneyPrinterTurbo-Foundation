@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-01",
+  "scope": "GitHub documentation and selected implementation files; no external repository was installed or executed",
+  "sources": [
+    {
+      "repository": "harry0703/MoneyPrinterTurbo",
+      "path": "README-en.md",
+      "blob_sha": "45bcfce89a9fa486989c14053f9171dc169762fa",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo/blob/main/README-en.md",
+      "read": true
+    },
+    {
+      "repository": "RayVentura/ShortGPT",
+      "path": "README.md",
+      "blob_sha": "e1fec7e1127fefe2ba8a5d88c2033a9cf643186e",
+      "url": "https://github.com/RayVentura/ShortGPT/blob/stable/README.md",
+      "read": true
+    },
+    {
+      "repository": "RayVentura/ShortGPT",
+      "path": "shortGPT/prompt_templates/facts_generator.yaml",
+      "blob_sha": "c5bf8f1e55d98700bb9dc1bb1640e327787eeb4a",
+      "url": "https://github.com/RayVentura/ShortGPT/blob/3df4e0f7a422bf7386565d498bf4521a2544c614/shortGPT/prompt_templates/facts_generator.yaml",
+      "read": true
+    },
+    {
+      "repository": "RayVentura/ShortGPT",
+      "path": "shortGPT/prompt_templates/yt_title_description.yaml",
+      "blob_sha": "eec5e0e83b4c4623a2d2e2266e48eae238f23a57",
+      "url": "https://github.com/RayVentura/ShortGPT/blob/3df4e0f7a422bf7386565d498bf4521a2544c614/shortGPT/prompt_templates/yt_title_description.yaml",
+      "read": true
+    },
+    {
+      "repository": "gyoridavid/short-video-maker",
+      "path": "README.md",
+      "blob_sha": "e391749a51294f941521066275ad48c567a46907",
+      "url": "https://github.com/gyoridavid/short-video-maker/blob/main/README.md",
+      "read": true
+    },
+    {
+      "repository": "gyoridavid/short-video-maker",
+      "path": "src/short-creator/ShortCreator.ts",
+      "blob_sha": "28497b99ff6a12c0cccc7ca801a56ccee9ae59de",
+      "url": "https://github.com/gyoridavid/short-video-maker/blob/main/src/short-creator/ShortCreator.ts",
+      "read": true
+    },
+    {
+      "repository": "gyoridavid/short-video-maker",
+      "path": "src/short-creator/libraries/Pexels.ts",
+      "blob_sha": "18a4848c484833be24fe7002d6ed95664c43294d",
+      "url": "https://github.com/gyoridavid/short-video-maker/blob/main/src/short-creator/libraries/Pexels.ts",
+      "read": true
+    },
+    {
+      "repository": "Asad-Ismail/MoneyPrinterTurbo-Extended",
+      "path": "README.md",
+      "blob_sha": "affa3a55666123d2f886ea43b86ab091461bad39",
+      "url": "https://github.com/Asad-Ismail/MoneyPrinterTurbo-Extended/blob/main/README.md",
+      "read": true
+    },
+    {
+      "repository": "Asad-Ismail/MoneyPrinterTurbo-Extended",
+      "path": "app/services/semantic_video.py",
+      "blob_sha": "40483e8caea1ac2f4aac7ad625860c20d37a9b7b",
+      "url": "https://github.com/Asad-Ismail/MoneyPrinterTurbo-Extended/blob/main/app/services/semantic_video.py",
+      "read": true
+    },
+    {
+      "repository": "FujiwaraChoki/MoneyPrinterV2",
+      "path": "README.md",
+      "blob_sha": "e990b77d4fcd355c79efadb88d44a33390c78b44",
+      "url": "https://github.com/FujiwaraChoki/MoneyPrinterV2/blob/main/README.md",
+      "read": true
+    },
+    {
+      "repository": "FujiwaraChoki/MoneyPrinterV2",
+      "path": "docs/YouTube.md",
+      "blob_sha": "5e51bf5b30b2c52385a6ce60bf360de338a17470",
+      "url": "https://github.com/FujiwaraChoki/MoneyPrinterV2/blob/main/docs/YouTube.md",
+      "read": true
+    }
+  ],
+  "licenses": {
+    "harry0703/MoneyPrinterTurbo": "MIT (local fork LICENSE retains Harry copyright)",
+    "RayVentura/ShortGPT": "MIT; LICENSE fetched",
+    "gyoridavid/short-video-maker": "MIT; LICENSE fetched",
+    "Asad-Ismail/MoneyPrinterTurbo-Extended": "MIT; LICENSE fetched",
+    "FujiwaraChoki/MoneyPrinterV2": "AGPL-3.0; LICENSE fetched; no source copied"
+  },
+  "copied_external_code": false
+}

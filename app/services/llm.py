@@ -18,17 +18,14 @@ from app.models.llm_provider import DEFAULT_LLM_PROVIDER_ID, get_llm_provider
 from app.utils import utils
 from app.utils.request_logging import trace_sdk_call
 
-_max_retries = 5
+_max_retries = 1  # One generation request; explicit user action starts another.
 MIN_SCRIPT_PARAGRAPH_NUMBER = 1
 MAX_SCRIPT_PARAGRAPH_NUMBER = 10
 MAX_SCRIPT_PROMPT_LENGTH = 2000
 MAX_SCRIPT_SYSTEM_PROMPT_LENGTH = 8000
-# “测试模型链接”只发送一条极小请求。OpenAI SDK 默认 600 秒超时并自动重试
-# 2 次，端点不可达（代理、防火墙或 DNS 故障）时，测试按钮会先长时间挂起，
-# 最后只留下一句 "Request timed out."（见 issue #1642）。这里给连接测试一个
-# 有界的短超时并禁用 SDK 重试，让失败快速、可诊断；正式的脚本生成链路保持
-# SDK 默认行为不变，避免误伤慢速推理模型和本地 Ollama 冷启动。
-LLM_CONNECTION_TEST_TIMEOUT_SECONDS = 30.0
+# Connection checks use a short timeout. Production generation uses the
+# configurable budget in _request_generation, with SDK retries disabled.
+LLM_CONNECTION_TEST_TIMEOUT_SECONDS = 10.0
 LLM_CONNECTION_TEST_MAX_RETRIES = 0
 # 这些片段来自 OpenAI SDK 的 APITimeoutError / APIConnectionError 以及
 # httpx 的底层连接异常文案；命中任意一个即按“端点不可达”处理。
@@ -59,14 +56,14 @@ DEFAULT_SCRIPT_SYSTEM_PROMPT = """
 Generate a script for a video, depending on the subject of the video.
 
 ## Constrains:
-1. the script is to be returned as a string with the specified number of paragraphs.
+1. return narration as plain text. The requested paragraph count and length are targets, not requirements; do not pad or repeat content to meet them.
 2. do not under any circumstance reference this prompt in your response.
 3. get straight to the point, don't start with unnecessary things like, "welcome to this video".
 4. you must not include any type of markdown or formatting in the script, never use a title.
 5. only return the raw content of the script.
 6. do not include "voiceover", "narrator" or similar indicators of what should be spoken at the beginning of each paragraph or line.
 7. you must not mention the prompt, or anything about the script itself. also, never talk about the amount of paragraphs or lines. just write the script.
-8. respond in the same language as the video subject.
+8. use the explicitly requested language, even when the topic is written in another language. If no language is requested, use the topic's language.
 """.strip()
 
 # Claude Code CLI 默认使用编码 agent 的系统提示词，其中大量约束与文案写作
@@ -424,7 +421,12 @@ def _generate_response(
             from google import genai
             from google.genai import types
 
-            http_options = types.HttpOptions(base_url=base_url) if base_url else None
+            http_kwargs = {"base_url": base_url} if base_url else {}
+            if request_timeout is not None:
+                http_kwargs["timeout"] = int(request_timeout * 1000)
+            if max_retries is not None:
+                http_kwargs["retry_options"] = types.HttpRetryOptions(attempts=max_retries + 1)
+            http_options = types.HttpOptions(**http_kwargs) if http_kwargs else None
             generation_config = types.GenerateContentConfig(
                 temperature=0.5,
                 top_p=1,
@@ -504,6 +506,8 @@ def _generate_response(
                 model=model_name,
                 messages=[{"role": "user", "content": prompt}],
                 drop_params=True,
+                **({"timeout": request_timeout} if request_timeout is not None else {}),
+                **({"num_retries": max_retries} if max_retries is not None else {}),
             )
 
             if not response:
@@ -878,6 +882,7 @@ def build_script_prompt(
 # Initialization:
 - video subject: {video_subject}
 - number of paragraphs: {paragraph_number}
+- paragraph count is advisory; prioritize a complete, natural explanation over matching it.
 """.rstrip()
     if language:
         prompt += f"\n- language: {language}"
@@ -889,6 +894,21 @@ def build_script_prompt(
 """.rstrip()
 
     return prompt
+
+
+def _request_generation(prompt, app_config=None):
+    """One bounded request using the selected provider; no automatic regeneration."""
+    runtime = app_config if app_config is not None else config.app
+    try:
+        timeout = float(runtime.get("llm_request_timeout_seconds", 90))
+        if not math.isfinite(timeout) or timeout <= 0:
+            timeout = 90.0
+    except (TypeError, ValueError, OverflowError):
+        timeout = 90.0
+    kwargs = {"request_timeout": timeout, "max_retries": 0}
+    if app_config is not None:
+        kwargs["app_config"] = app_config
+    return _generate_response(prompt, **kwargs)
 
 
 def generate_script(
@@ -957,10 +977,7 @@ def generate_script(
 
     for i in range(_max_retries):
         try:
-            if app_config is None:
-                response = _generate_response(prompt=prompt)
-            else:
-                response = _generate_response(prompt=prompt, app_config=app_config)
+            response = _request_generation(prompt, app_config)
             if isinstance(response, str) and response.startswith("Error: "):
                 # _generate_response returns provider failures as text. Passing
                 # that text through would make the task treat it as narration.
@@ -984,7 +1001,7 @@ def generate_script(
         if i < _max_retries - 1:
             logger.warning(f"failed to generate video script, trying again... {i + 1}")
     if not final_script:
-        logger.error("failed to generate video script after retries")
+        logger.error("video script request failed; no automatic regeneration")
     else:
         logger.success(f"completed: \n{final_script}")
     return final_script.strip()
@@ -1090,10 +1107,7 @@ Please note that you must use English for generating video search terms; Chinese
     for i in range(_max_retries):
         search_terms = []
         try:
-            if app_config is None:
-                response = _generate_response(prompt)
-            else:
-                response = _generate_response(prompt, app_config=app_config)
+            response = _request_generation(prompt, app_config)
             if response.startswith("Error: "):
                 # generate_terms 的公开返回类型是 List[str]。如果把 Provider 的
                 # 错误文案原样返回，下游只做空值判断时会把非空字符串误认为成功，
@@ -1372,7 +1386,7 @@ def generate_social_metadata(
     response = ""
     for i in range(_max_retries):
         try:
-            response = _generate_response(prompt)
+            response = _request_generation(prompt)
             if isinstance(response, str) and response.startswith("Error: "):
                 logger.error(f"failed to generate social metadata: {response}")
                 break

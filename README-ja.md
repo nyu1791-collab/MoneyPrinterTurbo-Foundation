@@ -1,3 +1,5 @@
+> **このPCの英語YouTube制作**：`youtube-en.cmd` をダブルクリック。初回の設定と使い方は [英語の解説・雑学](docs/YOUTUBE_EN.md)、参考元は [GitHub調査](docs/research/YOUTUBE_GITHUB_KNOWHOW_20261101.md)。
+
 > **Independent Foundation fork / 独立した派生版**<br>
 > Maintained at [nyu1791-collab/MoneyPrinterTurbo-Foundation](https://github.com/nyu1791-collab/MoneyPrinterTurbo-Foundation).<br>
 > Based on [harry0703/MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo), MIT; upstream history and attribution retained.<br>

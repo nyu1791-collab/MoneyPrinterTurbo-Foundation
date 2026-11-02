@@ -130,6 +130,8 @@ class VideoParams(BaseModel):
         None  # Custom audio file path, will ignore TTS and can still use Whisper subtitles
     )
     video_language: Optional[str] = ""  # auto detect
+    multilingual_enabled: bool = False
+    language_scripts: dict[str, str] = Field(default_factory=dict)
 
     voice_name: Optional[str] = ""
     voice_volume: Optional[float] = Field(default=1.0, allow_inf_nan=False)
@@ -170,6 +172,8 @@ class VideoParams(BaseModel):
 
 
 class SubtitleRequest(BaseModel):
+    multilingual_enabled: bool = False
+    language_scripts: dict[str, str] = Field(default_factory=dict)
     video_script: str
     video_language: Optional[str] = ""
     voice_name: Optional[str] = "zh-CN-XiaoxiaoNeural-Female"
@@ -197,6 +201,8 @@ class SubtitleRequest(BaseModel):
 
 
 class AudioRequest(BaseModel):
+    multilingual_enabled: bool = False
+    language_scripts: dict[str, str] = Field(default_factory=dict)
     video_script: str
     video_language: Optional[str] = ""
     voice_name: Optional[str] = "zh-CN-XiaoxiaoNeural-Female"

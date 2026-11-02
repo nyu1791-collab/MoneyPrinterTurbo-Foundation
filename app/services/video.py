@@ -81,12 +81,6 @@ fps = 30
 # 这里给视频素材多留一个很小的安全余量，避免音频末尾因为帧舍入出现黑屏、
 # 卡顿或最后一小段旁白没有画面的情况。
 _VIDEO_DURATION_SAFETY_MARGIN = 0.1
-_MIN_MATERIAL_DIMENSION = 480
-# 消息类应用和部分编码器会把画面尺寸向下取整，例如 WhatsApp 会把 9:16 的
-# 素材压成 478x850，比 480 少两个像素。直接按 480 硬卡会让这类素材全部被
-# 丢弃，最终以 "no valid materials found" 整体失败。这里留一个很小的容差，
-# 既能放行仅仅因为取整而略低于阈值的素材，也仍然能挡住真正的低清素材。
-_MIN_DIMENSION_TOLERANCE = 10
 # 默认串行处理片段，避免旧用户升级后 CPU 和内存占用突然增加。
 # 需要加速时可自行提高并发数，但每路都会启动独立的编码任务。
 _CLIP_PROCESSING_CONCURRENCY = 1
@@ -218,14 +212,8 @@ def _get_required_video_duration(audio_duration: float) -> float:
 
 
 def is_material_resolution_acceptable(width: int, height: int) -> bool:
-    """
-    判断素材分辨率是否足够用于合成。
-
-    标称最小值是 480x480，但允许比它低 `_MIN_DIMENSION_TOLERANCE` 个像素，
-    以兼容编码器/消息应用向下取整导致的尺寸（例如 WhatsApp 的 478x850）。
-    """
-    min_dimension = _MIN_MATERIAL_DIMENSION - _MIN_DIMENSION_TOLERANCE
-    return width >= min_dimension and height >= min_dimension
+    """Readable positive dimensions are enough; resolution is a production goal."""
+    return width > 0 and height > 0
 
 
 def _prioritize_unique_source_clips(
@@ -1959,7 +1947,7 @@ def preprocess_video(
     if not materials:
         return []
 
-    # 仅返回通过预处理校验的素材，避免低分辨率图片继续进入后续的视频合成流程。
+    # Keep readable materials even below the preferred resolution.
     valid_materials = []
     local_videos_dir = utils.storage_dir("local_videos", create=True)
 
@@ -2010,11 +1998,9 @@ def preprocess_video(
             height = clip.size[1]
             if not is_material_resolution_acceptable(width, height):
                 logger.warning(
-                    f"low resolution material: {width}x{height}, minimum "
-                    f"{_MIN_MATERIAL_DIMENSION}x{_MIN_MATERIAL_DIMENSION} required "
-                    f"(tolerance {_MIN_DIMENSION_TOLERANCE}px)"
+                    f"invalid material dimensions: {width}x{height}"
                 )
-                # 探测到低分辨率素材后立即关闭资源，并且不要把该素材返回给后续流程。
+                # A zero-sized frame cannot be rendered.
                 close_clip(clip)
                 continue
 

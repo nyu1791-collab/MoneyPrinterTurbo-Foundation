@@ -8,7 +8,7 @@ import pytest
 from app.services import voice
 
 
-@pytest.mark.parametrize("failure", ["no-audio", "no-timing", "interrupted"])
+@pytest.mark.parametrize("failure", ["no-audio", "interrupted"])
 def test_edge_failure_preserves_previous_narration_and_cleans_staging(failure):
     def stream(_communicate, on_chunk, **_kwargs):
         if failure != "no-audio":
@@ -28,6 +28,21 @@ def test_edge_failure_preserves_previous_narration_and_cleans_staging(failure):
         assert voice.azure_tts_v1("Hello", "en-US-AriaNeural-Female", 1.0, str(target)) is None
         assert target.read_bytes() == b"previous-good-audio"
         assert sorted(item.name for item in Path(temp_dir).iterdir()) == ["voice.mp3"]
+
+
+def test_edge_audio_without_optional_timing_is_kept_without_regeneration(tmp_path):
+    submaker = SimpleNamespace(get_srt=lambda: "")
+
+    def stream(_communicate, on_chunk, **_kwargs):
+        on_chunk({"type": "audio", "data": b"completed-speech"})
+
+    with patch.object(voice, "create_edge_tts_communicate") as create, \
+            patch.object(voice.edge_tts, "SubMaker", return_value=submaker), \
+            patch.object(voice, "stream_edge_tts_chunks", side_effect=stream):
+        target = tmp_path / "voice.mp3"
+        assert voice.azure_tts_v1("Hello", "en-US-GuyNeural-Male", 1.0, str(target)) is submaker
+    assert target.read_bytes() == b"completed-speech"
+    assert create.call_count == 1
 
 
 def test_edge_success_replaces_narration_with_matching_submaker():

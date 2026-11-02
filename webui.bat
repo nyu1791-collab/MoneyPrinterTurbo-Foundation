@@ -1,6 +1,8 @@
 @echo off
 setlocal
-set "CURRENT_DIR=%CD%"
+cd /d "%~dp0"
+set "CURRENT_DIR=%~dp0"
+set "PYTHONUTF8=1"
 echo ***** Current directory: %CURRENT_DIR% *****
 set "PYTHONPATH=%CURRENT_DIR%"
 

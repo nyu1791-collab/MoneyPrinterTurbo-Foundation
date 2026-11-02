@@ -128,7 +128,7 @@ class TestScriptPromptOptions(unittest.TestCase):
     def test_generate_script_sends_custom_prompt_to_llm(self):
         captured = {}
 
-        def fake_generate_response(prompt):
+        def fake_generate_response(prompt, **_kwargs):
             captured["prompt"] = prompt
             return "第一段。\n\n第二段。"
 
@@ -155,7 +155,7 @@ class TestScriptPromptOptions(unittest.TestCase):
             "openai_model_name": "snapshot-model",
         }
 
-        def fake_generate_response(prompt, app_config=None):
+        def fake_generate_response(prompt, app_config=None, **_kwargs):
             captured["prompt"] = prompt
             captured["app_config"] = app_config
             return "Snapshot response"
@@ -172,7 +172,7 @@ class TestScriptPromptOptions(unittest.TestCase):
         self.assertIs(captured["app_config"], app_config)
         self.assertEqual(captured["app_config"]["openai_api_key"], "snapshot-key")
 
-    def test_generate_script_retries_provider_error_instead_of_using_it_as_narration(self):
+    def test_generate_script_stops_after_provider_error_without_regeneration(self):
         with patch.object(
             llm,
             "_generate_response",
@@ -180,8 +180,8 @@ class TestScriptPromptOptions(unittest.TestCase):
         ) as generate_response:
             result = llm.generate_script(video_subject="Coffee")
 
-        self.assertEqual(result, "Real narration.")
-        self.assertEqual(generate_response.call_count, 2)
+        self.assertEqual(result, "")
+        self.assertEqual(generate_response.call_count, 1)
 
     def test_generate_script_returns_empty_when_provider_always_fails(self):
         with patch.object(
@@ -215,7 +215,7 @@ class TestScriptPromptOptions(unittest.TestCase):
             "[Intro] Great content [end]"  →  " Great content "
         """
 
-        def fake_generate_response(prompt):
+        def fake_generate_response(prompt, **_kwargs):
             # Two bracket groups and two paren groups on the same line.
             return (
                 "[Scene: Beach] A beautiful day at the [location: ocean].\n\n"
@@ -244,7 +244,7 @@ class TestScriptPromptOptions(unittest.TestCase):
         """
         captured = {}
 
-        def fake_generate_response(prompt):
+        def fake_generate_response(prompt, **_kwargs):
             captured["prompt"] = prompt
             return '["opening city", "middle office", "final sunset"]'
 
@@ -282,7 +282,7 @@ class TestScriptPromptOptions(unittest.TestCase):
         self.assertEqual(result, [])
         self.assertIsInstance(result, list)
 
-    def test_generate_terms_retries_non_string_items_in_recovered_json(self):
+    def test_generate_terms_does_not_regenerate_invalid_recovered_json(self):
         """The prose-wrapped JSON recovery path must enforce List[str] too."""
         with patch.object(
             llm,
@@ -297,8 +297,8 @@ class TestScriptPromptOptions(unittest.TestCase):
                 video_script="How to brew coffee.",
             )
 
-        self.assertEqual(result, ["coffee beans", "barista tools"])
-        self.assertEqual(generate_response.call_count, 2)
+        self.assertEqual(result, [])
+        self.assertEqual(generate_response.call_count, 1)
 
     def test_video_script_request_rejects_invalid_advanced_options(self):
         """

@@ -2094,6 +2094,11 @@ def _render_generation_task_snapshot(task_id, task):
             player_cols = st.columns(len(available_videos) * 2 + 1)
             for player_index, (video_index, url) in enumerate(available_videos):
                 with player_cols[player_index * 2 + 1]:
+                    language_code, language_result = next(
+                        ((code, item) for code, item in task.get("language_results", {}).items()
+                         if url in item.get("videos", [])), ("", {}))
+                    if language_code:
+                        st.caption({"en": "English", "hi": "हिन्दी / Hindi", "es": "Español"}.get(language_code, language_code))
                     st.video(url)
                     download_label = tr("Download Video")
                     if len(video_files) > 1:
@@ -2103,6 +2108,15 @@ def _render_generation_task_snapshot(task_id, task):
                         video_index + 1,
                         len(video_files),
                     )
+                    if language_code:
+                        download_name = download_name.removesuffix(".mp4") + f"-{language_code}.mp4"
+                    for artifact, label in (("audio_file", "Audio"), ("subtitle_path", "Subtitles (SRT)")):
+                        artifact_path = language_result.get(artifact)
+                        if artifact_path and os.path.isfile(artifact_path):
+                            with open(artifact_path, "rb") as artifact_file:
+                                st.download_button(label, artifact_file.read(),
+                                    file_name=f"{language_code}-{os.path.basename(artifact_path)}",
+                                    key=f"language_{artifact}_{task_id}_{video_index}", on_click="ignore")
                     with open(url, "rb") as video_file:
                         st.download_button(
                             download_label,
@@ -8451,6 +8465,12 @@ def _render_application():
     params.match_materials_to_script = bool(
         st.session_state.get("match_materials_to_script", False)
     )
+    params.multilingual_enabled = st.checkbox(
+        "3 languages: English / Hindi / Spanish",
+        value=bool(config.ui.get("multilingual_enabled", True)),
+        key="multilingual_enabled",
+    )
+    _set_runtime_config("ui", "multilingual_enabled", params.multilingual_enabled)
     _render_script_settings(left_panel, params)
 
     uploaded_files = _render_video_settings(middle_panel, params)

@@ -1,0 +1,22 @@
+# English explainers/trivia. These are starting targets, not completion gates.
+[app]
+llm_request_timeout_seconds = 90
+match_materials_to_script = true
+subtitle_provider = "edge"
+video_clip_concurrency = 1
+
+[ui]
+language = "en"
+video_language = "en-US"
+voice_name = "en-US-GuyNeural-Male"
+tts_server = "azure-tts-v1"
+voice_rate = 1.0
+voice_volume = 1.0
+paragraph_number = 3
+font_name = "BeVietnamPro-Medium.ttf"
+bgm_type = ""
+bgm_volume = 0.0
+subtitle_enabled = true
+subtitle_display_mode = "sentence"
+custom_system_prompt = """Write natural English narration for a general-audience explainer or trivia video. Open with a concrete question or surprising observation, explain the mechanism through everyday examples, and finish with one useful takeaway. Focus on one topic. Return narration only, without headings or stage directions. Treat requested duration, word count and paragraph count as flexible targets. Do not repeat or invent facts to fill a target. Use supplied facts and sources; if details are uncertain, omit them or state the uncertainty naturally. Do not invent studies, quotations, dates, or precise numbers."""
+video_script_prompt = "Aim for roughly 45-75 seconds for an initial Short, about 100-160 spoken words. This is guidance, not a limit. For a longer explainer, change this target to about 3-5 minutes. Prefer visual, everyday explanations over disconnected lists of facts."
